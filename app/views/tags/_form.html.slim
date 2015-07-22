@@ -1,0 +1,16 @@
+= form_for @tag do |f|
+  = f.label :name
+  = f.text_field :name
+  br
+  = f.label :model
+  = f.text_field :model
+  br
+  = f.label :color
+  = f.text_field :color
+  br
+  = f.label :size
+  = f.text_field :size
+  br
+  = f.label :manufacturer
+  = f.collection_select(:manufacturer_id, Manufacturer.all, :id, :name)
+  = f.submit

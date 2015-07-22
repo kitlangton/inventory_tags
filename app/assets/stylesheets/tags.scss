@@ -1,3 +1,93 @@
 // Place all the styles related to the Tags controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+//
+//
+
+body {
+  background-color: lightgrey;
+}
+
+.tags-container {
+}
+
+.tag-left{
+  float: left;
+  position: relative;
+  width: 50%;
+  display: inline-block;
+}
+
+.tag-right{
+  float: right;
+  width: 50%;
+  display: inline-block;
+}
+
+.row {
+  width: 100%;
+  text-align: center;
+}
+
+.tag {
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+  display: inline-block;
+  width: 345px;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  .manufacturer-name {
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  .tag-name{
+    text-align: center;
+  }
+  .tag-color{
+    padding: 10px 0px;
+    margin-bottom: 10px;
+  }
+  .tag-storage {
+    font-size: 1.7em;
+    margin-bottom: 10px;
+  }
+  .barcode {
+    .tag-barcode {
+    }
+    .tag-model {
+      position: relative;
+      top: -10px;
+    }
+    text-align: center;
+  }
+}
+
+.barby-barcode tbody {
+  display: block;
+  position: relative;
+  max-width: 50%;
+  .on { 
+    height: 40px;
+    width: 0.5px;
+    background-color: black;
+  }
+}
+
+.background-red {
+  background-color: red;
+}
+
+.background-green {
+  background-color: green;
+  color: white;
+}
+
+.background-yellow {
+  background-color: yellow;
+}
+
+.background-blue {
+  background-color: blu;
+}
