@@ -36,6 +36,9 @@ class TagsController < ApplicationController
     end
   end
 
+  def show
+  end
+
 
   private
 

@@ -17,7 +17,7 @@ br
             .tag-barcode= raw(tag.display_barcode)
             .tag-model=tag.model
         .tag-right
-          .tag-color class="background-#{tag.color.downcase}"
+          .tag-color style="background-color:#{tag.color}"
             = tag.color
           .tag-storage
             = "#{tag.size}GB"

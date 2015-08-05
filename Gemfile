@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'unicorn'
 gem 'slim-rails'
 gem 'normalize-rails'
+gem 'rmagick'
 
 gem 'barby'
 # Use Capistrano for deployment
