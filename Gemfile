@@ -13,8 +13,12 @@ gem 'unicorn'
 gem 'slim-rails'
 gem 'normalize-rails'
 gem 'rmagick'
-
 gem 'barby'
+gem 'prawn'
+gem 'prawn-svg'
+gem 'colorable'
+gem 'bourbon'
+gem 'neat'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

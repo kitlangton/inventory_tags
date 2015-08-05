@@ -9,6 +9,8 @@ body {
 }
 
 .tags-container {
+  @include outer-container;
+  padding: 10px;
 }
 
 .tag-left{
@@ -30,11 +32,24 @@ body {
 }
 
 .tag {
+  @include media(850px){
+    @include span-columns(4);
+    @include omega(3n);
+  }
+  @include media(min-width 580px max-width 850px){
+    @include span-columns(6);
+    @include omega(2n);
+  }
+  @include media(max-width 580px){
+    @include span-columns(12);
+    @include omega;
+  }
+}
+.tag {
   box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
-  display: inline-block;
-  width: 345px;
+  // width: 345px;
   background-color: white;
-  margin: 10px;
+  margin-bottom: 10px;
   padding: 10px;
   .manufacturer-name {
     margin-bottom: 15px;

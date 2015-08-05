@@ -37,6 +37,14 @@ class TagsController < ApplicationController
   end
 
   def show
+    @tag = Tag.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = TagPdf.new(@tag, view_context)
+        send_data pdf.render, filename: "Tag##{@tag.model}", type: "application/pdf"
+      end
+    end
   end
 
 

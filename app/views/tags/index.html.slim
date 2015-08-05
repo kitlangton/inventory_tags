@@ -8,19 +8,4 @@ br
 
 .row
   .tags-container
-    - @tags.each do |tag|
-      .tag
-        .tag-left
-          .manufacturer-name=tag.display_manufacturer
-          .tag-name=tag.name
-          .barcode
-            .tag-barcode= raw(tag.display_barcode)
-            .tag-model=tag.model
-        .tag-right
-          .tag-color style="background-color:#{tag.color}"
-            = tag.color
-          .tag-storage
-            = "#{tag.size}GB"
-        = link_to "Edit", edit_tag_path(tag)
-        br
-        = link_to "Delete", tag_path(tag), method: :delete
+    = render @tags

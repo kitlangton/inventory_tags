@@ -17,5 +17,4 @@ class Tag < ActiveRecord::Base
     barcode = Barby::Code128B.new(self.model)
     barcode.to_svg(height: 50)
   end
-
 end
