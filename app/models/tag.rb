@@ -4,6 +4,9 @@ require 'barby/outputter/svg_outputter'
 
 class Tag < ActiveRecord::Base
   belongs_to :manufacturer
+  validates :name, presence: true
+  validates :model, presence: true, length: { in: 5..10}
+  validates :size, presence: true, numericality: { only_integer: true }
 
   def display_manufacturer
     if manufacturer
