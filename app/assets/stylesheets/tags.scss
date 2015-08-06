@@ -4,8 +4,9 @@
 //
 //
 
-body {
-  background-color: lightgrey;
+.container {
+  @include outer-container;
+  padding: 10px;
 }
 
 .tags-container {

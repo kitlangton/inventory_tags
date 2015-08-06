@@ -19,6 +19,8 @@ gem 'prawn-svg'
 gem 'colorable'
 gem 'bourbon'
 gem 'neat'
+gem "pure-css-rails"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
