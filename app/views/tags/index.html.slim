@@ -1,3 +1,9 @@
+.form.search
+  = form_tag tags_path, method: :get do
+    = text_field_tag :search, params[:search], placeholder: "Search..."
+    br
+    /= submit_tag "Search", name: nil, class: "pure-button pure-button-primary"
+
 .row
   .tags-container
     = render @tags
