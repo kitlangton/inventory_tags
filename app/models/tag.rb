@@ -5,7 +5,8 @@ require 'barby/outputter/svg_outputter'
 class Tag < ActiveRecord::Base
   belongs_to :manufacturer
   validates :name, presence: true
-  validates :model, presence: true, length: { in: 5..10}
+  validates :color, color: true
+  validates :model, length: { in: 5..10}
   validates :size, presence: true, numericality: { only_integer: true }
 
   def display_manufacturer
@@ -24,9 +25,7 @@ class Tag < ActiveRecord::Base
 
   def self.search(search)
     if search
-      wildcard_search = "%#{search}%"
-
-      where("name ILIKE :search", search: wildcard_search)
+      where("name ILIKE ?", "%#{search}%")
     else
       all
     end
