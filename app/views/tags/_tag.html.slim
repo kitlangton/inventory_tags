@@ -6,10 +6,10 @@
       .tag-barcode= raw(tag.display_barcode)
       .tag-model=tag.model
   .tag-right
-    .tag-color style="background-color:#{tag.color}"
+    .tag-color style="background-color:#{tag.display_color}"
       = tag.color
     .tag-storage
-      = "#{tag.size}GB"
+      = tag.display_size
   = link_to "PDF", tag_path(tag, format: "pdf")
   br
   = link_to "Edit", edit_tag_path(tag)

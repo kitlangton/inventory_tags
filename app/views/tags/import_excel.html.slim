@@ -1,0 +1,14 @@
+h1 Import
+
+.container
+  table.pure-table
+    thead
+      tr
+        th Manufacturer
+        th Name
+        th Model #
+        th Color
+        th Size
+    tbody
+      - @tags.each do |tag|
+        = render partial: 'prospective_tag', locals: { tag: tag }

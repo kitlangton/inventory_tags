@@ -19,7 +19,10 @@ gem 'prawn-svg'
 gem 'colorable'
 gem 'bourbon'
 gem 'neat'
-gem "pure-css-rails"
+gem 'capybara'
+gem 'pure-css-rails'
+gem 'selenium-webdriver'
+gem 'rubyXL'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -27,8 +30,14 @@ gem "pure-css-rails"
 group :production do
   gem 'rails_12factor'
 end
+
 group :development, :test do
+  gem 'rspec-rails'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+end
+
+group :test do
+  gem 'database_cleaner'
 end

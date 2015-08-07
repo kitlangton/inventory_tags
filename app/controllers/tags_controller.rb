@@ -47,6 +47,19 @@ class TagsController < ApplicationController
     end
   end
 
+  def new_excel_import
+  end
+
+  def import_excel
+    uploaded_file = params[:import][:excel_doc]
+    file_name = uploaded_file.tempfile.to_path.to_s
+
+
+    data = ExcelParser.new(file_name).parse
+    # m = Manufacturer.first
+    # tag = Tag.new(name: "He", model: "EUTHOEUTD", size: 15, color: "Blue", manufacturer: m)
+    @tags = data.data
+  end
 
   private
 

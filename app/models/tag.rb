@@ -13,7 +13,19 @@ class Tag < ActiveRecord::Base
     if manufacturer
       manufacturer.name.upcase
     else
-      "NO MANUFACTURER"
+      "N/A"
+    end
+  end
+
+  def display_color
+    color || "N/A"
+  end
+
+  def display_size
+    if size && size > 0
+      "#{size}GB"
+    else
+      ""
     end
   end
 

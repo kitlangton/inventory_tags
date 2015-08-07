@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'manufacturers/index'
   get 'tags/index'
+  get 'tags/excel/import', as: 'new_excel_import', to: 'tags#new_excel_import'
+  post 'tags/excel/import', as: 'import_excel', to: 'tags#import_excel'
 
   resources :tags
   resources :manufacturers
