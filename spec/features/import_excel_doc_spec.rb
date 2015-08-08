@@ -12,5 +12,12 @@ describe "Import from an excel document" do
     click_button "Import From Excel"
 
     expect(page).to have_content "iPhone 4S"
+    expect(page).to have_content "APPLE"
+    expect(page).to have_content "16GB"
+  end
+
+  it "allows the user to edit the parsed tags" do
+
   end
 end
+

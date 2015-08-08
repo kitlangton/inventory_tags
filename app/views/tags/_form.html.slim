@@ -23,6 +23,6 @@
 
         br
         = f.label :manufacturer
-        = f.collection_select(:manufacturer_id, Manufacturer.all, :id, :name)
+        = f.text_field :manufacturer, placeholder: "Manufacturer"
         br
         = f.submit class: "pure-button button-success"

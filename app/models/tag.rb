@@ -3,22 +3,21 @@ require 'barby/barcode/code_128'
 require 'barby/outputter/svg_outputter'
 
 class Tag < ActiveRecord::Base
-  belongs_to :manufacturer
   validates :name, presence: true
   validates :color, color: true
-  validates :model, length: { in: 5..10}
+  validates :model, presence: true
   validates :size, presence: true, numericality: { only_integer: true }
 
   def display_manufacturer
     if manufacturer
-      manufacturer.name.upcase
+      manufacturer.upcase
     else
       "N/A"
     end
   end
 
   def display_color
-    color || "N/A"
+    color
   end
 
   def display_size

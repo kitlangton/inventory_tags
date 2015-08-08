@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722185155) do
+ActiveRecord::Schema.define(version: 20150808173800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,16 +25,13 @@ ActiveRecord::Schema.define(version: 20150722185155) do
   add_index "manufacturers", ["name"], name: "index_manufacturers_on_name", using: :btree
 
   create_table "tags", force: :cascade do |t|
-    t.integer  "manufacturer_id"
     t.string   "model"
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "size"
     t.string   "color"
+    t.string   "manufacturer"
   end
 
-  add_index "tags", ["manufacturer_id"], name: "index_tags_on_manufacturer_id", using: :btree
-
-  add_foreign_key "tags", "manufacturers"
 end

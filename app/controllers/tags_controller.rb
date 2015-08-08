@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  before_action :find_tag, only: [:show, :destroy, :edit, :update]
+
   def index
     @tags = Tag.search(params[:search])
   end
@@ -8,7 +10,6 @@ class TagsController < ApplicationController
   end
 
   def edit
-    @tag = Tag.find(params[:id])
   end
 
   def create
@@ -21,7 +22,6 @@ class TagsController < ApplicationController
   end
 
   def update
-    @tag = Tag.find(params[:id])
     if @tag.update(tag_params)
       redirect_to tags_path
     else
@@ -30,14 +30,12 @@ class TagsController < ApplicationController
   end
 
   def destroy
-    @tag = Tag.find(params[:id])
     if @tag.destroy
       redirect_to tags_path
     end
   end
 
   def show
-    @tag = Tag.find(params[:id])
     respond_to do |format|
       format.html
       format.pdf do
@@ -63,8 +61,12 @@ class TagsController < ApplicationController
 
   private
 
+  def find_tag
+    @tag = Tag.find(params[:id])
+  end
+
   def tag_params
-    params.require(:tag).permit(:name, :model, :manufacturer_id, :size, :color)
+    params.require(:tag).permit(:name, :model, :manufacturer, :size, :color)
   end
 
 end

@@ -1,6 +1,6 @@
-  tr
-    td =tag.display_manufacturer
-    td =tag.name
-    td =tag.model
-    td =tag.display_color
-    td =tag.display_size
+  tr class=("invalid" unless tag.valid?)
+    td contentEditable="" =tag.display_manufacturer
+    td contentEditable="" =tag.name
+    td contentEditable="" =tag.model
+    td contentEditable="" class=("error" if tag.errors[:color].count > 0) =tag.display_color
+    td contentEditable="" class=("error" if tag.errors[:size].count > 0) =tag.display_size

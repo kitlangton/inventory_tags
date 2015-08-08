@@ -3,8 +3,24 @@
     background-color: rgb(0, 120, 231);
     color: white;
   }
-  td {
-    background-color: white;
+  tbody {
+    .invalid {
+      .error {
+        color: red;
+       }
+    }
+    td {
+      position: relative;
+      @include transition(background-color 0.3s);
+      @include transition(transform 0.3s);
+      background-color: white;
+      &:focus {
+        font-weight: bold;
+        background-color: #B2E6FF;
+        outline: 0;
+        box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+        @include transform(translateY(-2px));
+      }
+    }
   }
 }
-

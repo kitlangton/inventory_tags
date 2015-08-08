@@ -10,26 +10,15 @@ body {
   background-color: #ddd;
 }
 
+.center  {
+  text-align: center;
+}
+
 .navbar {
   text-align: center;
   .link {
     display: inline-block;
     margin: 5px;
-    // a {
-    //   position: relative;
-    //   text-decoration: none;
-    //   color: red;
-    //   // border: 1px solid red;
-    //   border-bottom: 2px solid red;
-    //   padding: 1px 8px;
-    //   background: linear-gradient(180deg, white, pink);
-    //   border-radius: 10px;
-    //   // box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
-    //   &:hover {
-    //     border-bottom: 1px solid red;
-    //     top: 1px;
-    //   }
-    // }
   }
 }
 
