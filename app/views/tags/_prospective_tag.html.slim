@@ -1,6 +1,16 @@
   tr class=("invalid" unless tag.valid?)
-    td contentEditable="" =tag.display_manufacturer
-    td contentEditable="" =tag.name
-    td contentEditable="" =tag.model
-    td contentEditable="" class=("error" if tag.errors[:color].count > 0) =tag.display_color
-    td contentEditable="" class=("error" if tag.errors[:size].count > 0) =tag.display_size
+    td contentEditable=""
+      = tag.display_manufacturer
+      = hidden_field_tag "tags[#{i}][manufacturer]", tag.manufacturer
+    td contentEditable=""
+      = tag.name
+      = hidden_field_tag "tags[#{i}][name]", tag.name
+    td contentEditable=""
+      = tag.model
+      = hidden_field_tag "tags[#{i}][model]", tag.model
+    td.gb contentEditable="" class=("error" if tag.errors[:size].count > 0)
+      = tag.display_size
+      = hidden_field_tag "tags[#{i}][size]", tag.size
+    td.color data-color=(tag.hex) contentEditable="" class=("error" if tag.errors[:color].count > 0)
+      = tag.display_color
+      = hidden_field_tag "tags[#{i}][color]", tag.display_color

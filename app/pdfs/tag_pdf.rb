@@ -5,7 +5,7 @@ class TagPdf < Prawn::Document
     super(page_size: [370,175], margin: [15,0,0,15])
     @tag = tag
     @view = view
-    @color_hex = Colorable::Color.new(@tag.color).hex
+    @color_hex = @tag.hex
     define_grid(columns: 2)
     column_box([0,cursor], columns: 2, width: bounds.width) do
       text @tag.display_manufacturer,
@@ -30,13 +30,17 @@ class TagPdf < Prawn::Document
           fill_color @color_hex.to_s.chars[-6..-1].join
           fill_and_stroke_rectangle [cursor-bounds.height,cursor], bounds.width, bounds.height
         end
-      stroke_color '#000000'
-      fill_color '#000000'
+      stroke_color '000000'
+      fill_color '000000'
       move_down 8
-      text @tag.color,
+      if @tag.dark_color?
+        fill_color 'ffffff'
+      end
+      text @tag.display_color,
         size: 16,
         align: :center
       end
+      fill_color '000000'
       text_box "#{@tag.size}GB",
         at: [180, 180],
         width: 160,

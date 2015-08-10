@@ -1,12 +1,22 @@
 Rails.application.routes.draw do
+  get 'colors/index'
+
+  get 'colors/new'
+
+  get 'colors/edit'
+
   root 'tags#index'
 
   get 'manufacturers/index'
   get 'tags/index'
   get 'tags/excel/import', as: 'new_excel_import', to: 'tags#new_excel_import'
   post 'tags/excel/import', as: 'import_excel', to: 'tags#import_excel'
+  post 'tags/excel/submit', as: 'submit_excel', to: 'tags#submit_excel'
+  post 'tags/excel/save', as: 'save_excel', to: 'tags#save_excel'
+  get 'tags/excel/confirm_colors', as: 'confirm_colors', to: 'tags#confirm_colors'
 
   resources :tags
+  resources :colors
   resources :manufacturers
 
 

@@ -23,6 +23,10 @@ gem 'capybara'
 gem 'pure-css-rails'
 gem 'selenium-webdriver'
 gem 'rubyXL'
+gem 'jquery-turbolinks'
+gem 'velocityjs-rails'
+gem 'jquery-minicolors-rails'
+gem 'simple_form'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -7,13 +7,16 @@
     .invalid {
       .error {
         color: red;
-       }
+      }
     }
     td {
       position: relative;
       @include transition(background-color 0.3s);
       @include transition(transform 0.3s);
-      background-color: white;
+      &:after { 
+        width: 50px;
+        height: 50px;
+      }
       &:focus {
         font-weight: bold;
         background-color: #B2E6FF;
@@ -22,5 +25,21 @@
         @include transform(translateY(-2px));
       }
     }
+  }
+}
+
+.center-table {
+  table {
+  margin: 0 auto;
+  text-align: center;
+}
+}
+
+.minicolors-theme-kit {
+  position: relative;
+  width: 130px;
+  .minicolors-input {
+    // position: absolute;
+    width: 300px;
   }
 }

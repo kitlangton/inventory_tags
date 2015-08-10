@@ -1,0 +1,25 @@
+// Place all the styles related to the colors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.color-field {
+  text-align: center;
+  margin: 0 auto;
+  height: 50px;
+  background-color: white;
+  height: 45px;
+  width: 300px;
+  border-bottom: solid 2px #c9c9c9;
+}
+
+
+.mini  {
+  .minicolors-input {
+    height: 40px;
+  }
+  .minicolors-swatch {
+    display: none;
+  }
+}
+
+

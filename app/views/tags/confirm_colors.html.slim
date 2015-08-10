@@ -1,0 +1,21 @@
+h1 Assign Colors
+h3.center Some colors have not been recognized. Please assign swatches.
+
+= form_for :color, url: save_excel_path do |f|
+  .container
+    .center-table
+      table.pure-table.pure-table-striped
+        thead
+          tr
+            th Color
+            th Swatch
+        tbody
+          - @new_colors.each_with_index do |color, i|
+            tr
+              td.color
+                = hidden_field_tag "colors[#{i}][id]", color.id
+                = color.name
+                = hidden_field_tag "colors[#{i}][name]", color.name
+              td.swatch data-color=(color) contentEditable=""
+                = hidden_field_tag "colors[#{i}][hex]", color.hex
+      h1 = f.submit class: "pure-button button-success"

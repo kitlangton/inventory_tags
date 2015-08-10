@@ -2,15 +2,17 @@ h1 Import
 
 h3.center Please double check all of the data. Values in red need to edited.
 
-.container
-  table.pure-table.pure-table-striped
-    thead
-      tr
-        th Manufacturer
-        th Name
-        th Model #
-        th Color
-        th Size
-    tbody
-      - @tags.each do |tag|
-        = render partial: 'prospective_tag', locals: { tag: tag }
+= form_for :tags, url: submit_excel_path, method: :post do |f|
+  .container
+    table.pure-table.pure-table-striped
+      thead
+        tr
+          th Manufacturer
+          th Name
+          th Model #
+          th Size
+          th Color
+      tbody
+        - @tags.each_with_index do |tag, i|
+          = render partial: 'prospective_tag', locals: { tag: tag, i: i }
+    h1=  f.submit class: "pure-button button-success"

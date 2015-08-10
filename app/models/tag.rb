@@ -3,8 +3,8 @@ require 'barby/barcode/code_128'
 require 'barby/outputter/svg_outputter'
 
 class Tag < ActiveRecord::Base
+  belongs_to :color
   validates :name, presence: true
-  validates :color, color: true
   validates :model, presence: true
   validates :size, presence: true, numericality: { only_integer: true }
 
@@ -17,7 +17,17 @@ class Tag < ActiveRecord::Base
   end
 
   def display_color
-    color
+    self.color.try(:name)
+  end
+
+  def dark_color?
+    self.color.try(:dark?)
+  end
+
+  def hex
+    self.color.hex
+  rescue
+    ""
   end
 
   def display_size

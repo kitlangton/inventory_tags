@@ -1,0 +1,18 @@
+.container
+  .form
+    = form_for @color do |f|
+        - if @color.errors.count > 0
+          .error-container
+            .errors
+              h4 Errors
+              - @color.errors.full_messages.each do |msg|
+                p =msg
+        = f.label :name
+        = f.text_field :name, placeholder: "Name"
+        br
+        = f.label :swatch
+        span.mini
+          =f.text_field :hex, class: "minicolor-field", placeholder: "Pick a color..."
+        br
+        br
+        = f.submit class: "pure-button button-success"

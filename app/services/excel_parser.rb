@@ -21,7 +21,7 @@ class ExcelParser
       @data << Tag.new(manufacturer: parse_value(row[0].value),
                            model: row[1].value,
                            name: row[2].value.strip,
-                           color: parse_value(row[3].value),
+                           color: parse_color(row[3].value),
                            size: parse_size(row[4].value))
     end
     @data.reject! { |item| item.name == "" }
@@ -35,6 +35,19 @@ class ExcelParser
     if value && value != "N/A"
       value.strip
     end
+  end
+
+  def parse_color(color)
+    color = parse_value(color)
+    found = Color.where(name: color).first
+    return found if found
+    Color.new(name: "#{color}", hex: get_hex(color), complete: false)
+  end
+
+  def get_hex(name)
+    return Colorable::Color.new(name).hex
+  rescue
+    "#fff"
   end
 
   def parse_size(size)

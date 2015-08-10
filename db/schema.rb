@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808173800) do
+ActiveRecord::Schema.define(version: 20150810055846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "colors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "hex"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "complete",   default: true
+  end
 
   create_table "manufacturers", force: :cascade do |t|
     t.string   "name"
@@ -27,11 +35,15 @@ ActiveRecord::Schema.define(version: 20150808173800) do
   create_table "tags", force: :cascade do |t|
     t.string   "model"
     t.string   "name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "size"
-    t.string   "color"
     t.string   "manufacturer"
+    t.integer  "color_id"
+    t.boolean  "complete",     default: true
   end
 
+  add_index "tags", ["color_id"], name: "index_tags_on_color_id", using: :btree
+
+  add_foreign_key "tags", "colors"
 end
