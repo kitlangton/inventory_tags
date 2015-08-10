@@ -19,8 +19,8 @@ class ExcelParser
         next
       end
       @data << Tag.new(manufacturer: parse_value(row[0].value),
-                           model: row[1].value,
-                           name: row[2].value.strip,
+                           model: parse_model(row[1].value),
+                           name: parse_value(row[2].value),
                            color: parse_color(row[3].value),
                            size: parse_size(row[4].value))
     end
@@ -30,6 +30,11 @@ class ExcelParser
   end
 
   private
+
+  def parse_model(model)
+    model = parse_value(model)
+    model.chomp.strip
+  end
 
   def parse_value(value)
     if value && value != "N/A"

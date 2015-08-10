@@ -16,7 +16,16 @@ class ColorsController < ApplicationController
   end
 
   def edit
+    @color = Color.find(params[:id])
+  end
 
+  def update
+    @color = Color.find(params[:id])
+    if @color.update(color_params)
+      redirect_to tags_url
+    else
+      render :edit
+    end
   end
 
   private

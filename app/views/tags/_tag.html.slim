@@ -6,8 +6,9 @@
       .tag-barcode= raw(tag.display_barcode)
       .tag-model=tag.model
   .tag-right
-    .tag-color style="background-color:#{tag.hex}" class=("dark" if tag.dark_color?)
-      = tag.display_color
+    - if tag.color
+      .tag-color style="background-color:#{tag.hex}"
+        = link_to tag.display_color, edit_color_path(tag.color), class: ("dark" if tag.dark_color?)
     .tag-storage
       = tag.display_size
   = link_to "PDF", tag_path(tag, format: "pdf")

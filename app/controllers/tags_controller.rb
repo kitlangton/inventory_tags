@@ -34,7 +34,7 @@ class TagsController < ApplicationController
     @tag.assign_attributes( color: find_color(params[:tag][:color]))
     if @tag.update(tag_params)
       if @tag.color.complete == false
-        redirect_to confirm_colors_path
+        redirect_to edit_color_path(@tag.color)
       else
         redirect_to tags_path
       end

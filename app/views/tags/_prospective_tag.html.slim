@@ -8,9 +8,9 @@
     td contentEditable=""
       = tag.model
       = hidden_field_tag "tags[#{i}][model]", tag.model
-    td.gb contentEditable="" class=("error" if tag.errors[:size].count > 0)
-      = tag.display_size
+    td contentEditable=""
+      span.gb= tag.display_size(gb: true)
       = hidden_field_tag "tags[#{i}][size]", tag.size
-    td.color data-color=(tag.hex) contentEditable="" class=("error" if tag.errors[:color].count > 0)
+    td.color data-color=(tag.hex) contentEditable=""
       = tag.display_color
       = hidden_field_tag "tags[#{i}][color]", tag.display_color

@@ -102,9 +102,16 @@
   }
 }
 
-.dark {
-  color: white;
+.tag-color{ 
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  .dark {
+    color: white;
+  }
 }
+
 
 .barby-barcode tbody {
   display: block;

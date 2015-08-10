@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
   belongs_to :color
   validates :name, presence: true
   validates :model, presence: true
-  validates :size, presence: true, numericality: { only_integer: true }
+  validates :manufacturer, presence: true
 
   def display_manufacturer
     if manufacturer
@@ -30,9 +30,13 @@ class Tag < ActiveRecord::Base
     ""
   end
 
-  def display_size
+  def display_size(gb: true)
     if size && size > 0
-      "#{size}GB"
+      if gb
+        "#{size}GB"
+      else
+        "#{size}"
+      end
     else
       ""
     end
