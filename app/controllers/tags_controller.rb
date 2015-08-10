@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   before_action :find_tag, only: [:show, :destroy, :edit, :update]
 
   def index
-    @tags = Tag.search(params[:search])
+    @tags = Tag.search(params[:search]).order(updated_at: :desc)
   end
 
   def new
