@@ -20,7 +20,7 @@
     - else
       .tag-color.no-color N/A
     .tag-storage
-      - if tag.size
+      - if tag.size && tag.size > 0
         = tag.display_size
       - else
         span.no-size N/A

@@ -5,6 +5,7 @@ require 'barby/outputter/svg_outputter'
 
 class Tag < ActiveRecord::Base
   paginates_per 30
+  before_validation :prettify_data
   belongs_to :color
   validates :name, presence: true
   validates :model, presence: true
@@ -61,6 +62,10 @@ class Tag < ActiveRecord::Base
     else
       all
     end
+  end
+
+  def prettify_data
+    self.manufacturer = manufacturer.downcase.capitalize
   end
 
 end
