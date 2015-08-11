@@ -32,6 +32,7 @@ gem 'simple_form'
 gem 'chunky_png'
 gem 'kaminari'
 gem 'twitter-typeahead-rails'
+gem 'devise'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,6 +1,17 @@
 .title
   h1 =link_to "Inventory Tags", tags_path
 
+  - if current_user
+    .user
+      .pure-menu.pure-menu-horizontal
+        ul.pure-menu-list
+          li.pure-menu-item.pure-menu-has-children.pure-menu-allow-hover
+            = link_to current_user.email, "#", class: "pure-menu-link"
+            ul.pure-menu-children
+              li.pure-menu-item
+                = link_to "Edit Profile", edit_user_registration_path, class: "pure-menu-link"
+                = link_to "Sign Out", destroy_user_session_path, class: "pure-menu-link", method: :delete
+
   .navbar
     .link
       = link_to "New Tag", new_tag_path, class: "pure-button pure-button-primary"
