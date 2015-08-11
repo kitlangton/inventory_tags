@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   before_action :find_tag, only: [:show, :destroy, :edit, :update]
 
   def index
-    @tags = Tag.search(params[:search]).order(updated_at: :desc)
+    @tags = Tag.search(params[:search]).order(updated_at: :desc).page params[:page]
   end
 
   def new
@@ -72,7 +72,7 @@ class TagsController < ApplicationController
   def submit_excel
     @tags = []
     @new_colors = []
-    params[:tags].each do |k,v|
+    params[:tags].reverse.each do |k,v|
       Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
     end
     redirect_to confirm_colors_path

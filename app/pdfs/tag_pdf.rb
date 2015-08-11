@@ -6,43 +6,69 @@ class TagPdf < Prawn::Document
     @tag = tag
     @view = view
     @color_hex = @tag.hex
-    define_grid(columns: 2)
-    column_box([0,cursor], columns: 2, width: bounds.width) do
-      text @tag.display_manufacturer,
-        size: 24,
-        style: :bold,
-        column: 0,
-        align: :center
-      move_down 10
-      text @tag.name,
-        size: 16,
-        align: :center
-      svg @tag.display_barcode,
-        position: :center
-      text @tag.model,
-        size: 16,
-        align: :center
-      move_down 80
-      old_cursor = cursor
-      bounding_box([180,226], width: 160, height: 30) do
-        stroke do
-          stroke_color @color_hex.to_s.chars[-6..-1].join
-          fill_color @color_hex.to_s.chars[-6..-1].join
-          fill_and_stroke_rectangle [cursor-bounds.height,cursor], bounds.width, bounds.height
-        end
+    text_box @tag.display_manufacturer,
+      at: [-10,160],
+      height: 50,
+      width: 175,
+      size: 24,
+      style: :bold,
+      column: 0,
+      align: :center
+    move_down 10
+    # stroke do
+    #   stroke_color '000000'
+    #   fill_color 'ffffff'
+    #   fill_and_stroke_rectangle [0,-20], 175, 50
+    #   stroke_color '000000'
+    #   fill_color '000000'
+    # end
+    image = Tempfile.new('barcode.png')
+    image.write @tag.display_barcode_png
+    image.close
+    image image.path,
+      at: [-10,100],
+      position: :center,
+      width: 175,
+      height: 70
+    move_cursor_to(0)
+    text_box @tag.name,
+      at: [-10,135],
+      height: 32,
+      width: 175,
+      size: 16,
+      overflow: :shrink_to_fit,
+      valign: :center,
+      align: :center
+    move_cursor_to(0)
+    text_box @tag.model,
+      at: [-10, 30],
+      width: 175,
+      size: 16,
+      align: :center
+    # old_cursor = cursor
+    bounding_box([180,160], width: 160, height: 30) do
+      stroke do
+        stroke_color @color_hex.to_s.chars[-6..-1].join
+        fill_color @color_hex.to_s.chars[-6..-1].join
+        fill_and_stroke_rectangle [cursor-bounds.height,cursor], bounds.width, bounds.height
+      end
       stroke_color '000000'
       fill_color '000000'
-      move_down 8
       if @tag.dark_color?
         fill_color 'ffffff'
       end
-      text @tag.display_color,
-        size: 16,
-        align: :center
-      end
-      fill_color '000000'
+    end
+    move_cursor_to(0)
+    text_box @tag.display_color,
+      at: [180,151],
+      width: 160,
+      height: 50,
+      size: 16,
+      align: :center
+    fill_color '000000'
+    if @tag.size
       text_box "#{@tag.size}GB",
-        at: [180, 180],
+        at: [180, 110],
         width: 160,
         height: 80,
         align: :center,

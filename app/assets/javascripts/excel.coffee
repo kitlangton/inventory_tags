@@ -3,14 +3,17 @@ checkEnter = (e) ->
   txtArea = /textarea/i.test((e.target or e.srcElement).tagName)
   txtArea or (e.keyCode or e.which or e.charCode or 0) != 13
 
+filterText = ->
+  return this.nodeType == 3
+
 $ ->
   $('.swatch').each (i, td) ->
     $(@).css
       'background-color': $(@).data('color')
   $('.gb').each (i, td) ->
-    text = $(@).text().match /\d+/ or ""
-    if text
-      $(@).text text
+    matched_text = $(@).text().match /\d+/
+    if matched_text
+      $(@).text matched_text
       $(@).addClass "has-gb"
     else
       $(@).text ""
@@ -18,7 +21,7 @@ $ ->
   $("td").keyup ->
     $(@).find("input").val($(@).text())
   $(".gb").keyup ->
-    $(@).closest('td').find("input").val($(@).text())
+    $(@).closest("tr").find(".tag-size-field").val($(@).text())
   $(".gb").focus ->
     $(@).addClass "has-gb"
   $(".gb").blur ->

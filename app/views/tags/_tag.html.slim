@@ -1,4 +1,12 @@
 .tag
+  .tag-top
+    .left
+      = link_to "Download", tag_path(tag, format: "pdf")
+      = link_to "Edit", edit_tag_path(tag)
+      = link_to "Delete", tag_path(tag), method: :delete
+    .cart-status
+      .icon +
+    .cart-added ADDED
   .tag-left
     .manufacturer-name=tag.display_manufacturer
     .tag-name=tag.name
@@ -9,10 +17,10 @@
     - if tag.color
       .tag-color style="background-color:#{tag.hex}"
         = link_to tag.display_color, edit_color_path(tag.color), class: ("dark" if tag.dark_color?)
+    - else
+      .tag-color.no-color N/A
     .tag-storage
-      = tag.display_size
-  = link_to "PDF", tag_path(tag, format: "pdf")
-  br
-  = link_to "Edit", edit_tag_path(tag)
-  br
-  = link_to "Delete", tag_path(tag), method: :delete
+      - if tag.size
+        = tag.display_size
+      - else
+        span.no-size N/A

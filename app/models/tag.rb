@@ -1,8 +1,10 @@
 require 'barby'
 require 'barby/barcode/code_128'
+require 'barby/outputter/png_outputter'
 require 'barby/outputter/svg_outputter'
 
 class Tag < ActiveRecord::Base
+  paginates_per 30
   belongs_to :color
   validates :name, presence: true
   validates :model, presence: true
@@ -17,7 +19,7 @@ class Tag < ActiveRecord::Base
   end
 
   def display_color
-    self.color.try(:name)
+    self.color.try(:name) || ""
   end
 
   def dark_color?
@@ -25,9 +27,9 @@ class Tag < ActiveRecord::Base
   end
 
   def hex
-    self.color.hex
+    self.color.hex || "#ffffff"
   rescue
-    ""
+    "#ffffff"
   end
 
   def display_size(gb: true)
@@ -42,9 +44,14 @@ class Tag < ActiveRecord::Base
     end
   end
 
-  def display_barcode
+  def display_barcode(height:50)
     barcode = Barby::Code128B.new(self.model)
-    barcode.to_svg(height: 50)
+    barcode.to_svg(height: height)
+  end
+
+  def display_barcode_png(height:80)
+    barcode = Barby::Code128B.new(self.model)
+    barcode.to_png(height: height, xdim: 2)
   end
 
 
