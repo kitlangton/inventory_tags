@@ -3,9 +3,6 @@ checkEnter = (e) ->
   txtArea = /textarea/i.test((e.target or e.srcElement).tagName)
   txtArea or (e.keyCode or e.which or e.charCode or 0) != 13
 
-filterText = ->
-  return this.nodeType == 3
-
 $ ->
   $('.swatch').each (i, td) ->
     $(@).css
@@ -34,11 +31,9 @@ $ ->
       $(@).removeClass "has-gb"
   $(".swatch").keypress (e) ->
     return !(!~[37, 38, 39, 40].indexOf(e.keyCode) && !e.ctrlKey)
-
   $('form').submit ->
     $(".pure-button").text("Submitting...")
     $(".pure-button").attr("disabled", true)
-
   $('.swatch').minicolors
     theme: 'kit'
     change: (hex, opacity) ->
@@ -49,4 +44,3 @@ $ ->
     change: (hex, opacity) ->
       $(@).css
         'background-color': hex
-
