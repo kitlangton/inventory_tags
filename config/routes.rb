@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'onboarding/index'
+
   get 'colors/index'
 
   get 'colors/new'
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
   post 'tags/excel/submit', as: 'submit_excel', to: 'tags#submit_excel'
   post 'tags/excel/save', as: 'save_excel', to: 'tags#save_excel'
   get 'tags/excel/confirm_colors', as: 'confirm_colors', to: 'tags#confirm_colors'
+  get 'onboarding', as: 'onboarding', to: "onboarding#index"
 
   resources :tags
   resources :colors

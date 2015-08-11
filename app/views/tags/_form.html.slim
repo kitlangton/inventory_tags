@@ -15,14 +15,16 @@
 
         br
         = f.label :color
-        = f.text_field :color, placeholder: "Color"
+        = f.text_field :color, placeholder: "Color", class: "typeahead-color typeahead"
 
+        br
         br
         = f.label :size
         = f.text_field :size, placeholder: "Size"
 
         br
         = f.label :manufacturer
-        = f.text_field :manufacturer, placeholder: "Manufacturer"
+        = f.text_field :manufacturer, placeholder: "Manufacturer", class: "typeahead-manufacturer typeahead"
+        br
         br
         = f.submit class: "pure-button button-success"

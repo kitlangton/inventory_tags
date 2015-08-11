@@ -3,6 +3,10 @@ class TagsController < ApplicationController
 
   def index
     @tags = Tag.search(params[:search]).order(updated_at: :desc).page params[:page]
+    respond_to do |format|
+      format.html
+      format.json { render json: Tag.all.pluck(:manufacturer).uniq.map(&:downcase).map(&:capitalize) }
+    end
   end
 
   def new

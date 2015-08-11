@@ -96,3 +96,22 @@ input[type="text"]:focus {
   background: rgb(28, 184, 65); /* this is a green */
 }
 
+
+.tt-dataset {
+  background-color: white;
+  // @include linear-gradient(180deg, white, white, #ddd);
+  box-shadow: 0px 2px 7px rgba(0,0,0,0.3);
+  .tt-suggestion {
+    padding: 5px;
+    &:hover {
+      background-color: rgb(0, 120, 231);
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  .tt-cursor {
+    background-color: rgb(0, 120, 231);
+    color: white;
+  }
+}

@@ -3,7 +3,7 @@
     .left
       = link_to "Download", tag_path(tag, format: "pdf")
       = link_to "Edit", edit_tag_path(tag)
-      = link_to "Delete", tag_path(tag), method: :delete
+      = link_to "Delete", tag_path(tag), method: :delete, data: { confirm: "Are you sure you want to delete this tag?"}
     .cart-status
       .icon +
     .cart-added ADDED

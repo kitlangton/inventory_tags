@@ -1,0 +1,24 @@
+h1 Welcome!
+h2.center This is the Verizon Inventory Tags website.
+
+.container
+  p Here is a tag:
+  .tags-container
+    .tag
+      .tag-top
+        .left
+          = link_to "Download", "#"
+        .cart-status
+          .icon +
+        .cart-added ADDED
+      .tag-left
+        .manufacturer-name COMPANY
+        .tag-name Product Name
+        .barcode
+          .tag-barcode=  raw(Barby::Code128B.new("ABC123").to_svg(height: 50))
+          .tag-model ABC123
+      .tag-right
+        .tag-color style="background-color: yellow"
+          .center Yellow
+        .tag-storage.center
+            span.no-size 16GB

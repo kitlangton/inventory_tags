@@ -31,6 +31,7 @@ gem 'jquery-minicolors-rails'
 gem 'simple_form'
 gem 'chunky_png'
 gem 'kaminari'
+gem 'twitter-typeahead-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
