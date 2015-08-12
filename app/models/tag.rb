@@ -10,6 +10,27 @@ class Tag < ActiveRecord::Base
   validates :name, presence: true
   validates :model, presence: true
   validates :manufacturer, presence: true
+  has_attached_file :image
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
+  def get_image
+    p self
+    pdf = TagPdf.new(self, nil)
+    t = Tempfile.new(["pdf", ".pdf"])
+    t.close
+    pdf.render_file(t.path)
+    image = Magick::ImageList.new(t.path)
+    img = Tempfile.new(["image",".png"])
+    img.close
+    image.write img.path
+    p img
+    p image
+    `convert #{img.path} -background white -flatten #{img.path}`
+    png_file = File.open(img.path)
+    self.image = png_file
+    save
+    self.image
+  end
 
   def display_manufacturer
     if manufacturer

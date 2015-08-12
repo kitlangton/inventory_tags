@@ -1,17 +1,9 @@
 class ImposePdf < Prawn::Document
-  def initialize(image, view)
+  def initialize(tags, view)
     super()
     @view = view
-    @image = image
-    @image.each_with_index do |img, i|
-      image = Tempfile.new("image_#{i}.jpg")
-      image.close
-      img.write image.path
-      p img
-      p image
-      `convert #{image.path} -background white -flatten #{image.path}`
-      p image
-      image image.path
+    tags.each do |tag|
+      image tag.image.path
       move_down 20
     end
   end

@@ -32,6 +32,9 @@ gem 'kaminari'
 gem 'twitter-typeahead-rails'
 gem 'devise'
 gem 'rmagick'
+gem 'aws-sdk', '< 2.0'
+gem 'paperclip'
+gem 'figaro'
 
 
 # Use Capistrano for deployment
