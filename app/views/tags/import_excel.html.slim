@@ -15,4 +15,4 @@ h3.center Please double check all of the data. Values in red need to edited.
       tbody
         - @tags.each_with_index do |tag, i|
           = render partial: 'prospective_tag', locals: { tag: tag, i: i }
-    h1=  f.submit class: "pure-button button-success"
+    h1=  f.submit class: "pure-button button-success", data: { disable_with: "Submitting..." }

@@ -33,9 +33,6 @@ $ ->
 
   $(".swatch").keypress (e) ->
     return !(!~[37, 38, 39, 40].indexOf(e.keyCode) && !e.ctrlKey)
-  $('form').submit ->
-    $(".pure-button").text("Submitting...")
-    $(".pure-button").attr("disabled", true)
   $('.swatch').minicolors
     theme: 'kit'
     change: (hex, opacity) ->

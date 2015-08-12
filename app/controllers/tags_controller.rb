@@ -38,8 +38,8 @@ class TagsController < ApplicationController
 
   def update
     @tag.assign_attributes( color: find_color(params[:tag][:color]))
-    @tag.get_image
     if @tag.update(tag_params)
+      ImageWorker.perform_async(@tag.id)
       if @tag.color.complete == false
         redirect_to edit_color_path(@tag.color)
       else
@@ -83,8 +83,14 @@ class TagsController < ApplicationController
     params[:tags].each do |k,v|
       tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
       ImageWorker.perform_async(tag.id)
+      @tags << tag
     end
-    redirect_to confirm_colors_path
+
+    if @tags.any? { |t| t.color.try(:complete) == false }
+      redirect_to confirm_colors_url
+    else
+      redirect_to tags_url
+    end
   end
 
   def confirm_colors
