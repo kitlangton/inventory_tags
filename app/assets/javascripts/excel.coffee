@@ -17,32 +17,32 @@ $ ->
   $("td").keypress checkEnter
   $("td").keyup ->
     $(@).find("input").val($(@).text())
-  # $(".gb").keyup ->
-  #   $(@).closest("tr").find(".tag-size-field").val($(@).text())
-  # $(".gb").focus ->
-  #   $(@).addClass "has-gb"
+  $(".gb").keyup ->
+    $(@).closest("tr").find(".tag-size-field").val($(@).text())
+  $(".gb").focus ->
+    $(@).addClass "has-gb"
   $(".gb").blur ->
     text = $(@).text().match /\d+/
-  #   if text
-  #     $(@).text text
-  #     $(@).addClass "has-gb"
-  #   else
-  #     $(@).text ""
-  #     $(@).removeClass "has-gb"
-  #
-  #
-  # $(".swatch").keypress (e) ->
-  #   return !(!~[37, 38, 39, 40].indexOf(e.keyCode) && !e.ctrlKey)
-  # $('form').submit ->
-  #   $(".pure-button").text("Submitting...")
-  #   $(".pure-button").attr("disabled", true)
-  # $('.swatch').minicolors
-  #   theme: 'kit'
-  #   change: (hex, opacity) ->
-  #     $(@).closest(".swatch").css
-  #       'background-color': hex
-  #     $(@).closest(".swatch").find("input").val(hex)
-  # $('.minicolor-field').minicolors
-  #   change: (hex, opacity) ->
-  #     $(@).css
-  #       'background-color': hex
+    if text
+      $(@).text text
+      $(@).addClass "has-gb"
+    else
+      $(@).text ""
+      $(@).removeClass "has-gb"
+
+
+  $(".swatch").keypress (e) ->
+    return !(!~[37, 38, 39, 40].indexOf(e.keyCode) && !e.ctrlKey)
+  $('form').submit ->
+    $(".pure-button").text("Submitting...")
+    $(".pure-button").attr("disabled", true)
+  $('.swatch').minicolors
+    theme: 'kit'
+    change: (hex, opacity) ->
+      $(@).closest(".swatch").css
+        'background-color': hex
+      $(@).closest(".swatch").find("input").val(hex)
+  $('.minicolor-field').minicolors
+    change: (hex, opacity) ->
+      $(@).css
+        'background-color': hex
