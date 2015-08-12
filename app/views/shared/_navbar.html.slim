@@ -5,6 +5,13 @@
     .user
       .pure-menu.pure-menu-horizontal
         ul.pure-menu-list
+          li.pure-menu-item class=("pure-menu-selected" if controller.controller_name == "tags" && controller.action_name == "index")
+            = link_to "Tags", tags_path, class: "pure-menu-link"
+          li.pure-menu-item#cart-header class=("pure-menu-selected" if controller.controller_name == "cart")
+            = link_to cart_path, class: "pure-menu-link" do
+              | Cart
+              | : 
+              span.cart-size data-size=(@cart.count) = "#{@cart.count}"
           li.pure-menu-item.pure-menu-has-children.pure-menu-allow-hover
             = link_to current_user.email, "#", class: "pure-menu-link"
             ul.pure-menu-children

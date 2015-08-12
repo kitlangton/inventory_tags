@@ -2,6 +2,7 @@ class TagsController < ApplicationController
   before_action :find_tag, only: [:show, :destroy, :edit, :update]
 
   def index
+    @cart = session[:cart]
     @tags = Tag.search(params[:search]).order(updated_at: :desc).page params[:page]
     respond_to do |format|
       format.html
@@ -48,6 +49,7 @@ class TagsController < ApplicationController
   end
 
   def destroy
+    session[:cart].delete(@tag.id.to_s)
     if @tag.destroy
       redirect_to tags_path
     end

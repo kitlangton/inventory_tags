@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'cart/show'
+
   devise_for :users
   get 'onboarding/index'
 
@@ -18,6 +20,13 @@ Rails.application.routes.draw do
   post 'tags/excel/save', as: 'save_excel', to: 'tags#save_excel'
   get 'tags/excel/confirm_colors', as: 'confirm_colors', to: 'tags#confirm_colors'
   get 'onboarding', as: 'onboarding', to: "onboarding#index"
+
+  get 'cart', as: 'cart', to: 'cart#show'
+  post 'cart', as: 'add_to_cart', to: 'cart#add_to_cart'
+  post 'cart/delete', as: 'delete_from_cart', to: 'cart#delete_from_cart'
+  post 'cart/clear', as: 'clear_cart', to: 'cart#clear_cart'
+  get 'cart/tags', as: 'cart_tags', to: 'cart#cart_tags'
+  get 'cart/download', as: 'download_cart', to: 'cart#download_cart'
 
   resources :tags
   resources :colors
