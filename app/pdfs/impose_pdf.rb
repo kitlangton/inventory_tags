@@ -3,7 +3,8 @@ class ImposePdf < Prawn::Document
     super()
     @view = view
     tags.each do |tag|
-      image tag.image.path
+      image tag.prawn_image,
+        position: :center
       move_down 20
     end
   end

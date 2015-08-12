@@ -89,4 +89,12 @@ class Tag < ActiveRecord::Base
     self.manufacturer = manufacturer.downcase.capitalize
   end
 
+  def prawn_image
+    if Rails.env.production?
+      open(self.image.url)
+    else
+      self.image.path
+    end
+  end
+
 end
