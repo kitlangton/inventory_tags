@@ -4,6 +4,4 @@
 //= require jquery.minicolors
 //= require turbolinks
 //= require twitter/typeahead.min
-//= require velocity.min
-//= require velocity.ui.min
 //= require_tree .
