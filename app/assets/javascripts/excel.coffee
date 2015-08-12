@@ -17,18 +17,20 @@ $ ->
   $("td").keypress checkEnter
   $("td").keyup ->
     $(@).find("input").val($(@).text())
-  $(".gb").keyup ->
-    $(@).closest("tr").find(".tag-size-field").val($(@).text())
-  $(".gb").focus ->
-    $(@).addClass "has-gb"
-  $(".gb").blur ->
-    text = $(@).text().match /\d+/ or ""
-    if text
-      $(@).text text
-      $(@).addClass "has-gb"
-    else
-      $(@).text ""
-      $(@).removeClass "has-gb"
+  # $(".gb").keyup ->
+  #   $(@).closest("tr").find(".tag-size-field").val($(@).text())
+  # $(".gb").focus ->
+  #   $(@).addClass "has-gb"
+  # $(".gb").blur ->
+  #   text = $(@).text().match /\d+/ or ""
+  #   if text
+  #     $(@).text text
+  #     $(@).addClass "has-gb"
+  #   else
+  #     $(@).text ""
+  #     $(@).removeClass "has-gb"
+  #
+  #
   # $(".swatch").keypress (e) ->
   #   return !(!~[37, 38, 39, 40].indexOf(e.keyCode) && !e.ctrlKey)
   # $('form').submit ->
