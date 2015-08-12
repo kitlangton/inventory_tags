@@ -18,4 +18,4 @@ h3.center Some colors have not been recognized. Please assign swatches.
                 = hidden_field_tag "colors[#{i}][name]", color.name
               td.swatch data-color=(color) contentEditable="" readonly="readonly"
                 = hidden_field_tag "colors[#{i}][hex]", color.hex
-      h1 = f.submit class: "pure-button button-success", data: { disable_with : "Submitting..." }
+      h1 = f.submit class: "pure-button button-success", data: { disable_with: "Submitting..." }

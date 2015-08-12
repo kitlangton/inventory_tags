@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'cart/clear', as: 'clear_cart', to: 'cart#clear_cart'
   get 'cart/tags', as: 'cart_tags', to: 'cart#cart_tags'
   get 'cart/download', as: 'download_cart', to: 'cart#download_cart'
+  get 'cart/process', as: 'process_cart', to: 'cart#process_cart'
 
   resources :tags
   resources :colors

@@ -3,7 +3,7 @@
 
   .navbar
     .link
-      = link_to "Download All", download_cart_path, class: "pure-button pure-button-primary", data: { disable_with: "Downloading..." }
+      = button_tag "Download All", class: "pure-button pure-button-primary cart-download", id: 'cart-download'
       .link
         = link_to "Clear", clear_cart_path, class: "pure-button button-warning", method: :post, data: { confirm: "Are you sure you want to clear your cart?"}
     br
