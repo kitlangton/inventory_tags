@@ -8,22 +8,17 @@ $ ->
     $el = $(this)
     topPosition = $el.position().top
     if currentRowStart != topPosition
-      # we just came to a new row.  Set all the heights on the completed row
       currentDiv = 0
       while currentDiv < rowDivs.length
         rowDivs[currentDiv].height currentTallest
         currentDiv++
-      # set the variables for the new row
       rowDivs.length = 0
-      # empty the array
       currentRowStart = topPosition
       currentTallest = $el.height()
       rowDivs.push $el
     else
-      # another div on the current row.  Add it to the list and check if it's taller
       rowDivs.push $el
       currentTallest = if currentTallest < $el.height() then $el.height() else currentTallest
-    # do the last row
     currentDiv = 0
     while currentDiv < rowDivs.length
       rowDivs[currentDiv].height currentTallest
@@ -99,7 +94,7 @@ $ ->
         "100"
       $(@).removeClass "added"
       if $('#cart').size() > 0
-          $(@).closest('.tag').velocity 'transition.expandOut', 200
+        $(@).closest('.tag').velocity 'transition.expandOut', 200
     else
       addToCart($(@).data('id'))
       $(@).addClass "added"
