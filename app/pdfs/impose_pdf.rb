@@ -3,7 +3,6 @@ class ImposePdf < Prawn::Document
     super()
     @view = view
     @image = image
-    text 'hi'
     @image.each_with_index do |img, i|
       image = Tempfile.new("image_#{i}.jpg")
       image.close
