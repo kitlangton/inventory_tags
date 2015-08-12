@@ -132,3 +132,7 @@ input[type="text"]:focus, input[type="password"]:focus {
     color: white;
   }
 }
+
+.pure-menu-children {
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
+}
