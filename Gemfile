@@ -14,7 +14,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'unicorn'
 gem 'slim-rails'
 gem 'normalize-rails'
-gem 'rmagick'
 gem 'barby'
 gem 'prawn'
 gem 'prawn-svg'
@@ -32,6 +31,8 @@ gem 'chunky_png'
 gem 'kaminari'
 gem 'twitter-typeahead-rails'
 gem 'devise'
+gem 'rmagick'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -23,8 +23,19 @@ class CartController < ApplicationController
 
   def download_cart
     @tags = Tag.find(@cart)
-    pdf = TagPdf.new(@tags.first, view_context)
-    send_data pdf.render,  filename: "Test", type: "application/pdf"
+    images = []
+    @tags.each_with_index do |tag, i|
+      pdf = TagPdf.new(tag, view_context)
+      t = Tempfile.new("pdf_#{i}.pdf")
+      t.close
+      pdf.render_file(t.path)
+      t.path
+      image = Magick::ImageList.new(t.path)
+      `convert #{t.path} -background white -flatten -define png:color-type=2 -define png:bit-depth=8 #{t.path}`
+      images << image
+    end
+    imposed = ImposePdf.new(images, view_context)
+    send_data imposed.render, filename: "Test.pdf", type: "application/pdf"
   end
 
   def delete_from_cart
