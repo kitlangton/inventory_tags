@@ -21,8 +21,8 @@ $ ->
   #   $(@).closest("tr").find(".tag-size-field").val($(@).text())
   # $(".gb").focus ->
   #   $(@).addClass "has-gb"
-  # $(".gb").blur ->
-  #   text = $(@).text().match /\d+/ or ""
+  $(".gb").blur ->
+    text = $(@).text().match /\d+/ or ""
   #   if text
   #     $(@).text text
   #     $(@).addClass "has-gb"
