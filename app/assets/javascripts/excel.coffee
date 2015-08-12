@@ -22,7 +22,7 @@ $ ->
   # $(".gb").focus ->
   #   $(@).addClass "has-gb"
   $(".gb").blur ->
-    text = $(@).text().match /\d+/ or ""
+    text = $(@).text().match /\d+/
   #   if text
   #     $(@).text text
   #     $(@).addClass "has-gb"
