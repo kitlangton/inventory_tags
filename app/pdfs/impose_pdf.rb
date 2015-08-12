@@ -7,7 +7,10 @@ class ImposePdf < Prawn::Document
       image = Tempfile.new("image_#{i}.png")
       image.close
       img.write image.path
-      `convert #{image.path} -background white -flatten -define png:color-type=2 -define png:bit-depth=8 #{image.path}`
+      p img
+      p image
+      `convert #{image.path} -background white -flatten #{image.path}`
+      p image
       image image.path
       move_down 20
     end

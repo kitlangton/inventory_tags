@@ -4,7 +4,7 @@ require 'barby/outputter/png_outputter'
 require 'barby/outputter/svg_outputter'
 
 class Tag < ActiveRecord::Base
-  paginates_per 30
+  paginates_per 15
   before_validation :prettify_data
   belongs_to :color
   validates :name, presence: true
