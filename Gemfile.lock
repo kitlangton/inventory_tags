@@ -320,6 +320,7 @@ DEPENDENCIES
   pure-css-rails
   rails (= 4.2.3)
   rails_12factor
+  redis
   rmagick
   rspec-rails
   rubyXL

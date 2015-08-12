@@ -36,6 +36,7 @@ gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 gem 'figaro'
 gem 'sidekiq'
+gem 'redis'
 gem 'nprogress-rails'
 
 

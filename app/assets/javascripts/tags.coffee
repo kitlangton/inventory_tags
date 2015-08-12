@@ -30,6 +30,11 @@ addToCart = (id) ->
   new_size = cart.data('size') + 1
   cart.data('size', new_size)
   cart.text cart.data('size')
+  cart.velocity(
+    color: '#0078E7'
+  ).velocity
+    color: '#777'
+
   $.ajax({
     type: "POST",
     url: "/cart",
@@ -47,6 +52,7 @@ deleteFromCart = (id) ->
   new_size = cart.data('size') - 1
   cart.data('size', new_size)
   cart.text cart.data('size')
+
   $.ajax({
     type: "POST",
     url: "/cart/delete",
