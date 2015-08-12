@@ -6,6 +6,7 @@ require 'barby/outputter/svg_outputter'
 class Tag < ActiveRecord::Base
   paginates_per 15
   before_validation :prettify_data
+  before_update :get_image
   belongs_to :color
   validates :name, presence: true
   validates :model, presence: true
@@ -22,14 +23,10 @@ class Tag < ActiveRecord::Base
     image = Magick::ImageList.new(t.path)
     img = Tempfile.new(["image",".png"])
     img.close
-    image.write img.path
-    p img
-    p image
-    `convert #{img.path} -background white -flatten #{img.path}`
+    image.write(img.path) { self.quality = 100 }
+    `convert #{img.path} -background white -flatten -quality 100 #{img.path}`
     png_file = File.open(img.path)
     self.image = png_file
-    save
-    self.image
   end
 
   def display_manufacturer

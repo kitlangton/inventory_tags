@@ -67,7 +67,7 @@ class TagPdf < Prawn::Document
       align: :center
     fill_color '000000'
     if @tag.size
-      text_box "#{@tag.size}GB",
+      text_box "#{@tag.display_size}",
         at: [180, 110],
         width: 160,
         height: 80,

@@ -23,7 +23,10 @@ class CartController < ApplicationController
 
   def download_cart
     @tags = Tag.find(@cart)
-    @tags.map(&:get_image)
+    @tags.select { |t| t.image.size.nil? }.each do |tag|
+      tag.get_image
+      tag.save
+    end
     imposed = ImposePdf.new(@tags, view_context)
     send_data imposed.render, filename: "Test.pdf", type: "application/pdf"
   end

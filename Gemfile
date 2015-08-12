@@ -35,6 +35,7 @@ gem 'rmagick'
 gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 gem 'figaro'
+gem 'sidekiq'
 
 
 # Use Capistrano for deployment

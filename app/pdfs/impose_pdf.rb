@@ -4,6 +4,7 @@ class ImposePdf < Prawn::Document
     @view = view
     tags.each do |tag|
       image tag.prawn_image,
+        scale: 0.75,
         position: :center
       move_down 20
     end

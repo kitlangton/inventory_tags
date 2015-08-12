@@ -21,6 +21,7 @@ class TagsController < ApplicationController
     @tag = Tag.new(tag_params)
     @tag.assign_attributes( color: find_color(params[:tag][:color]))
     if @tag.save
+      ImageWorker.perform_async(@tag.id)
       if @tag.color.complete == false
         redirect_to confirm_colors_path
       else
@@ -37,6 +38,7 @@ class TagsController < ApplicationController
 
   def update
     @tag.assign_attributes( color: find_color(params[:tag][:color]))
+    @tag.get_image
     if @tag.update(tag_params)
       if @tag.color.complete == false
         redirect_to edit_color_path(@tag.color)
@@ -78,8 +80,9 @@ class TagsController < ApplicationController
   def submit_excel
     @tags = []
     @new_colors = []
-    params[:tags].reverse.each do |k,v|
-      Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
+    params[:tags].each do |k,v|
+      tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
+      ImageWorker.perform_async(tag.id)
     end
     redirect_to confirm_colors_path
   end
