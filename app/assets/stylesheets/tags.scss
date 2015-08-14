@@ -39,6 +39,7 @@
 .tag-top {
   @include user-select(none);
   text-align: left;
+  height: 35px;
   padding: 5px 0px;
   border-bottom: 1px solid rgb(0, 120, 231);
   background-color: rgb(0, 120, 231);
