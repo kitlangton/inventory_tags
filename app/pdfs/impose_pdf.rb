@@ -29,7 +29,7 @@ class ImposePdf < Prawn::Document
           line [410, cursor], [420, cursor]
         end
       end
-      if (i+1) % 5 == 0
+      if (i+1) % 5 == 0 && (i+1) != tags.size
         start_new_page
       end
     end
