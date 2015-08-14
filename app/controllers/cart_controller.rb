@@ -1,16 +1,10 @@
 class CartController < ApplicationController
   layout 'none', only: [:cart_tags]
-
+  before_action :find_cart_tags, only: [:show, :cart_tags, :download_cart, :process_cart]
   def show
-    session[:cart] ||= []
-    @cart = session[:cart]
-    @cart_tags = Tag.find(session[:cart])
   end
 
   def cart_tags
-    session[:cart] ||= []
-    @cart = session[:cart]
-    @cart_tags = Tag.find(session[:cart])
   end
 
   def add_to_cart
@@ -22,8 +16,7 @@ class CartController < ApplicationController
   end
 
   def process_cart
-    @tags = Tag.find(@cart)
-    @tags.select { |t| t.image.size.nil? }.each do |tag|
+    @cart_tags.select { |t| t.image.size.nil? }.each do |tag|
       tag.get_image
       tag.save
     end
@@ -31,8 +24,7 @@ class CartController < ApplicationController
   end
 
   def download_cart
-    @tags = Tag.find(@cart)
-    imposed = ImposePdf.new(@tags, view_context)
+    imposed = ImposePdf.new(@cart_tags, view_context)
     send_data imposed.render, filename: "Test.pdf", type: "application/pdf"
   end
 
@@ -50,6 +42,23 @@ class CartController < ApplicationController
       format.html { redirect_to cart_path }
       format.json { render json: "success" }
     end
+  end
+
+  private
+
+  def find_cart_tags
+    @cart_tags = Tag.find(@cart)
+  rescue
+    @valid_tags = []
+    @cart.each do |tag|
+      if Tag.find_by_id(tag.to_i)
+        @valid_tags << tag
+      end
+    end
+    @valid_tags.compact
+    session[:cart] = @valid_tags
+    @cart = @valid_tags
+    @cart_tags = Tag.where(id: @valid_tags)
   end
 
 end

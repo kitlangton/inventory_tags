@@ -143,3 +143,55 @@ input[type="text"]:focus, input[type="password"]:focus {
 .pure-menu-children {
   box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
 }
+
+.message {
+  margin-bottom: 30px;
+  .message-header {
+    // font-style: italic;
+    font-weight: bold;
+    font-size: 1.3em;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 120, 231);
+    border-bottom-left-radius: 0px;
+    background-color: rgb(0, 120, 231);
+    color: white;
+    border-bottom-right-radius: 0px;
+    padding: 10px;
+  }
+  .message-body {
+    border: 2px solid rgb(0, 120, 231);
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 10px;
+    position: relative;
+    &:after {
+      content:"";
+      position:absolute;
+      bottom:-13px; /* value = - border-top-width - border-bottom-width */
+      left:48px; /* value = (:before left) + (:before border-left) - (:after border-left) */
+      border-width:13px 13px 0;
+      border-style:solid;
+      border-color:#fff transparent;
+      /* reduce the damage in FF3.0 */
+      display:block;
+      width:0;
+    }
+    &:before {
+      content:"";
+      position:absolute;
+      bottom:-16px; /* value = - border-top-width - border-bottom-width */
+      left:47px; /* value = (:before left) + (:before border-left) - (:after border-left) */
+      border-width:14px 14px 0;
+      border-style:solid;
+      border-color:rgb(0, 120, 231) transparent;
+      /* reduce the damage in FF3.0 */
+      display:block;
+      width:0;
+    }
+  }
+  @include span-columns(6);
+  @include shift(3);
+}

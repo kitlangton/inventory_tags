@@ -1,6 +1,13 @@
 .cart
   h1 Download Cart
 
+- if @cart.size == 0
+  br
+  .container
+    .message
+      .message-header Your cart is empty!
+      .message-body Add a tag to the cart by clicking the + button in the upper right-hand corner of a tag.
+- else
   .navbar
     .link
       = button_tag "Download All", class: "pure-button pure-button-primary cart-download", id: 'cart-download'
@@ -14,5 +21,3 @@
     .tags-container#tags-container
       = render @cart_tags
 
-  - if @cart.size == 0
-    h1 Your cart is empty.
