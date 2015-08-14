@@ -15,7 +15,8 @@ class ImposePdf < Prawn::Document
       end
 
       image tag.prawn_image,
-        scale: 0.75,
+        width: 278,
+        height: 131,
         position: :center
       move_down 10
       stroke do

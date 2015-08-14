@@ -2,7 +2,8 @@ require 'colorable'
 
 class TagPdf < Prawn::Document
   def initialize(tag, view)
-    super(page_size: [370,175], margin: [15,0,0,15])
+    super(page_size: [740,350], margin: [15,0,0,15])
+    scale 2
     @tag = tag
     @view = view
     @color_hex = @tag.hex
