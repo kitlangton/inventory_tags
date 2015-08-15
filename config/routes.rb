@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'tags/excel/save', as: 'save_excel', to: 'tags#save_excel'
   get 'tags/excel/confirm_colors', as: 'confirm_colors', to: 'tags#confirm_colors'
   get 'onboarding', as: 'onboarding', to: "onboarding#index"
+  post 'onboarding/onboard', as: 'onboard_user', to: 'onboarding#onboard_user'
 
   get 'cart', as: 'cart', to: 'cart#show'
   post 'cart', as: 'add_to_cart', to: 'cart#add_to_cart'

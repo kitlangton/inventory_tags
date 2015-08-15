@@ -7,7 +7,7 @@
     .pure-menu.pure-menu-horizontal
       ul.pure-menu-list
         li.pure-menu-item class=("pure-menu-selected" if controller.controller_name == "tags" && controller.action_name == "index")
-          = link_to "End Tutorial", tags_path, class: "pure-menu-link"
+          = link_to "End Tutorial", onboard_user_path, class: "pure-menu-link", method: :post
         li.pure-menu-item#cart-header class=("pure-menu-selected" if controller.controller_name == "cart")
           = link_to "#", class: "pure-menu-link" do
             | Cart
@@ -19,7 +19,27 @@
             li.pure-menu-item
               = link_to "Sign Out", destroy_user_session_path, class: "pure-menu-link", method: :delete
 
+h1.con
+  span.congrats C
+  span.congrats O
+  span.congrats N
+  span.congrats G
+  span.congrats R
+  span.congrats A
+  span.congrats T
+  span.congrats U
+  span.congrats L
+  span.congrats A
+  span.congrats T
+  span.congrats I
+  span.congrats O
+  span.congrats N
+  span.congrats S
+
 .messages
+  h1.part-5 Download Cart
+  .part-6.center
+    button.pure-button.pure-button-primary.download-all Download All
   .part-1
     .container
       .message
@@ -62,14 +82,43 @@
   .container.part-4
     .message
       .message-header
-        | Remove From The Cart
+        | The Download Cart
       .message-body
         | Notice how the 
         span.important.cart-callout Download Cart 
         | in the upper right corner of the screen now has 1 item in it?
         br
         br
-        | Click into it to go your download cart.
+        | Click on it to go your download cart.
+  .container.part-5
+    .message
+      .message-header
+        | Remove From The Cart
+      .message-body
+        | I have added a few more tags to your cart so you can practice removing tags. Click on one of the 
+        span.important x 
+        | buttons to remove that tag from your cart.
+  .container.part-6
+    .message
+      .message-header
+        | Download Your Tags
+      .message-body
+        | Now that you've selected the tags you want to download, all that's left to do is to download your tags. Click the blue 
+        span.important Download All 
+        | button.
+
+  h1.part-7.center
+    = button_to "Complete Tutorial", onboard_user_path, class: 'pure-button button-success center complete-tutorial', method: :post
+  .container.part-7
+    .message
+      .message-header
+        | Tutorial Complete
+      .message-body
+        | You have finished the tutorial.. If you have any questions please email 
+        a.important.plus-callout href="mailto:kit.langton@coloredge.com?Subject=Verizon%20Inventory%20Tag%20Support" Coloredge Technical Support
+        | . Click the giant
+        span.important Complete Tutorial 
+        | button to enter the website.
 
 .tags-container.part-2
   .tag.example-tag

@@ -2,6 +2,10 @@ class TagsController < ApplicationController
   before_action :find_tag, only: [:show, :destroy, :edit, :update]
 
   def index
+    unless current_user.onboarded?
+      redirect_to onboarding_url
+      return
+    end
     @cart = session[:cart]
     @tags = Tag.search(params[:search]).order(updated_at: :desc).page params[:page]
     respond_to do |format|

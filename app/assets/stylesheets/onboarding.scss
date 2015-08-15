@@ -27,7 +27,15 @@
   background-color: white;
 }
 
-.part-3,.part-4{
+.part-3,.part-4,.part-6, .part-7{
+  display: none;
+}
+
+.messages .part-5 {
+  display: none;
+}
+
+.messages .part-6 {
   display: none;
 }
 
@@ -83,3 +91,14 @@
   color: rgb(0, 120, 231);
   cursor: pointer;
 }
+
+.con {
+ display: none;
+}
+
+.congrats {
+  height: 0;
+  opacity: 0;
+  color: red;
+}
+

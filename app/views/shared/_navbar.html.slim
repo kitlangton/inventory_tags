@@ -16,6 +16,7 @@
             = link_to current_user.email, "#", class: "pure-menu-link"
             ul.pure-menu-children
               li.pure-menu-item
+                = link_to "Tutorial", onboarding_path, class: "pure-menu-link"
                 = link_to "Edit Profile", edit_user_registration_path, class: "pure-menu-link"
                 = link_to "Sign Out", destroy_user_session_path, class: "pure-menu-link", method: :delete
 
