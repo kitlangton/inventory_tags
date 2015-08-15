@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //
 //
+html {
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
 .errors {
   position: relative;
   h4 {

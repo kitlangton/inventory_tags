@@ -1,62 +1,59 @@
-h1 Welcome!
+h1 Tutorial
 
+.part-1
+  .container
+    .message
+      .message-header
+        | Welcome
+        .next.next-2
+          a Next
+      .message-body
+        | Welcome to the 
+        span.important Verizon Inventory Tags 
+        | Website.
+        br
+        br
+        | Click 
+        span.important Next 
+        | to learn how to use the site.
 
-.container
+.container.part-2
   .message
-    .message-header Tags
-    .message-body Here are how inventory tags are displayed on the site.
-  .tags-container
-    .tag
-      .tag-top
-        .left
-          = link_to "Download", "#"
-        .cart-status
-          .icon +
-        .cart-added ADDED
-      .tag-left
-        .manufacturer-name COMPANY
-        .tag-name Product Name
-        .barcode
-          .tag-barcode=  raw(Barby::Code128B.new("ABC123").to_svg(height: 50))
-          .tag-model ABC123
-      .tag-right
-        .tag-color style="background-color: yellow"
-          .center Yellow
-        .tag-storage.center
-            span.no-size 16GB
-    .tag
-      .tag-top
-        .left
-          = link_to "Download", "#"
-        .cart-status
-          .icon +
-        .cart-added ADDED
-      .tag-left
-        .manufacturer-name COMPANY
-        .tag-name Product Name
-        .barcode
-          .tag-barcode=  raw(Barby::Code128B.new("ABC123").to_svg(height: 50))
-          .tag-model ABC123
-      .tag-right
-        .tag-color style="background-color: yellow"
-          .center Yellow
-        .tag-storage.center
-            span.no-size 16GB
-    .tag
-      .tag-top
-        .left
-          = link_to "Download", "#"
-        .cart-status
-          .icon +
-        .cart-added ADDED
-      .tag-left
-        .manufacturer-name COMPANY
-        .tag-name Product Name
-        .barcode
-          .tag-barcode=  raw(Barby::Code128B.new("ABC123").to_svg(height: 50))
-          .tag-model ABC123
-      .tag-right
-        .tag-color style="background-color: yellow"
-          .center Yellow
-        .tag-storage.center
-            span.no-size 16GB
+    .message-header
+      | Anatomy of a Tag
+      .next
+        a Next
+    .message-body
+      | Here is an example of a 
+      span.important Tag
+      | .
+      br
+      br
+      span.important Hover 
+      | your mouse over the different parts of the tag to learn more.
+.tags-container.part-2
+  .tag.example-tag
+    .anatomy.no
+      .name
+      .description
+    .tag-top
+      .cart-status
+        .icon +
+      .cart-added ADDED
+    .tag-left
+      .manufacturer-name.hover data-name="Manufacturer" data-description="This is the name of the manufacturer." APPLE
+      .tag-name.hover data-name="Product Name" data-description="This is the name of the product." iPhone 6
+      .barcode
+        .tag-barcode.hover data-name="Barcode" data-description="This is the barcode represenation of the model number." =  raw(Barby::Code128B.new("LOLOLOL").to_svg(height: 50))
+        .tag-model.hover AUHOA43AT
+    .tag-right
+      .tag-color.hover style="background-color: gold"
+        .center Gold
+      .tag-storage.center.hover
+          span.no-size 64GB
+  .tag-padding
+.container.part-3
+  .message
+    .message-header
+      | Add To The Cart
+    .message-body Click the + button in the upper right-hand corner of the tag to add it to your download cart.

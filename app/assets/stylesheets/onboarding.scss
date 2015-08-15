@@ -1,3 +1,64 @@
 // Place all the styles related to the onboarding controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.example-tag {
+  .tag-name {
+    z-index: 14;
+  }
+  .tag-barcode {
+    z-index: 1;
+  }
+  background-color: white;
+  @include media(850px){
+    @include span-columns(4);
+    @include shift(4);
+  }
+  @include media(min-width 580px max-width 850px){
+    @include span-columns(6);
+    @include shift(3);
+  }
+  @include media(max-width 580px){
+    @include span-columns(12);
+  }
+}
+
+.tag {
+  background-color: white;
+}
+
+.part-2, .part-3{
+  opacity: 0
+}
+
+.important {
+  font-weight: bold;
+  // color: rgb(0, 120, 231);
+}
+
+.hover {
+  @include transition(transform 0.2s);
+  &:hover {
+    cursor: pointer;
+    @include transform(scale(1.2))
+  }
+}
+
+.anatomy {
+  display: none;
+  background-color: white;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  top: 230px;
+  left: 0;
+  text-align: center;
+  background-color: rgb(0, 120, 231);
+  .name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+}
+
