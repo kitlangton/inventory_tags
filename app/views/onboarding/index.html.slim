@@ -1,59 +1,143 @@
-h1 Tutorial
+.title
+  h1
+    | Inventory Tags 
+    span.important Tutorial
 
-.part-1
-  .container
+  .user
+    .pure-menu.pure-menu-horizontal
+      ul.pure-menu-list
+        li.pure-menu-item class=("pure-menu-selected" if controller.controller_name == "tags" && controller.action_name == "index")
+          = link_to "End Tutorial", tags_path, class: "pure-menu-link"
+        li.pure-menu-item#cart-header class=("pure-menu-selected" if controller.controller_name == "cart")
+          = link_to "#", class: "pure-menu-link" do
+            | Cart
+            | : 
+            span.cart-size data-size=0 0
+        li.pure-menu-item.pure-menu-has-children.pure-menu-allow-hover
+          = link_to current_user.email, "#", class: "pure-menu-link"
+          ul.pure-menu-children
+            li.pure-menu-item
+              = link_to "Sign Out", destroy_user_session_path, class: "pure-menu-link", method: :delete
+
+.messages
+  .part-1
+    .container
+      .message
+        .message-header
+          | Welcome
+          .next.next-2
+            a Next
+        .message-body
+          | Welcome to the 
+          span.important Verizon Inventory Tags 
+          | Website.
+          br
+          br
+          | Click 
+          span.important Next 
+          | to advance to the next lesson.
+
+  .container.part-2
     .message
       .message-header
-        | Welcome
-        .next.next-2
-          a Next
+        | Anatomy of a Tag
+        .next
+          a.next-3 Next
       .message-body
-        | Welcome to the 
-        span.important Verizon Inventory Tags 
-        | Website.
+        | Here is an example of a 
+        span.important Tag
+        | .
         br
         br
-        | Click 
-        span.important Next 
-        | to learn how to use the site.
+        span.important Hover 
+        | your mouse over the different parts of the tag to learn more.
+  .container.part-3
+    .message
+      .message-header
+        | Add To The Cart
+      .message-body
+        | Click the 
+        span.important.plus-callout + 
+        | button in the upper right-hand corner of the tag to add it to your download cart.
+  .container.part-4
+    .message
+      .message-header
+        | Remove From The Cart
+      .message-body
+        | Notice how the 
+        span.important.cart-callout Download Cart 
+        | in the upper right corner of the screen now has 1 item in it?
+        br
+        br
+        | Click into it to go your download cart.
 
-.container.part-2
-  .message
-    .message-header
-      | Anatomy of a Tag
-      .next
-        a Next
-    .message-body
-      | Here is an example of a 
-      span.important Tag
-      | .
-      br
-      br
-      span.important Hover 
-      | your mouse over the different parts of the tag to learn more.
 .tags-container.part-2
   .tag.example-tag
     .anatomy.no
       .name
       .description
     .tag-top
-      .cart-status
+      .cart-status.hover data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
         .icon +
       .cart-added ADDED
     .tag-left
-      .manufacturer-name.hover data-name="Manufacturer" data-description="This is the name of the manufacturer." APPLE
-      .tag-name.hover data-name="Product Name" data-description="This is the name of the product." iPhone 6
+      .manufacturer-name.hover data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
+      .tag-name.hover data-name="Product Name" data-description="The name of the product." iPhone 6
       .barcode
-        .tag-barcode.hover data-name="Barcode" data-description="This is the barcode represenation of the model number." =  raw(Barby::Code128B.new("LOLOLOL").to_svg(height: 50))
-        .tag-model.hover AUHOA43AT
+        .tag-barcode.hover data-name="Barcode" data-description="The barcode represenation of the model number." =  raw(Barby::Code128B.new("AUHOA43AT").to_svg(height: 50))
+        .tag-model.hover data-name="Model Number" data-description="The product's model number." AUHOA43AT
     .tag-right
-      .tag-color.hover style="background-color: gold"
+      .tag-color.hover data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
         .center Gold
-      .tag-storage.center.hover
+      .tag-storage.center.hover data-name="Storage Size" data-description="The storage size of the product."
           span.no-size 64GB
-  .tag-padding
-.container.part-3
-  .message
-    .message-header
-      | Add To The Cart
-    .message-body Click the + button in the upper right-hand corner of the tag to add it to your download cart.
+
+.tags-container.part-5
+  .tag
+    .tag-top
+      .cart-status.hover data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
+        .icon +
+      .cart-added ADDED
+    .tag-left
+      .manufacturer-name.hover data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
+      .tag-name.hover data-name="Product Name" data-description="The name of the product." iPhone 6
+      .barcode
+        .tag-barcode.hover data-name="Barcode" data-description="The barcode represenation of the model number." =  raw(Barby::Code128B.new("AUHOA43AT").to_svg(height: 50))
+        .tag-model.hover data-name="Model Number" data-description="The product's model number." AUHOA43AT
+    .tag-right
+      .tag-color.hover data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
+        .center Gold
+      .tag-storage.center.hover data-name="Storage Size" data-description="The storage size of the product."
+          span.no-size 64GB
+  .tag
+    .tag-top
+      .cart-status.hover data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
+        .icon +
+      .cart-added ADDED
+    .tag-left
+      .manufacturer-name.hover data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
+      .tag-name.hover data-name="Product Name" data-description="The name of the product." iPhone 6
+      .barcode
+        .tag-barcode.hover data-name="Barcode" data-description="The barcode represenation of the model number." =  raw(Barby::Code128B.new("AUHOA43AT").to_svg(height: 50))
+        .tag-model.hover data-name="Model Number" data-description="The product's model number." AUHOA43AT
+    .tag-right
+      .tag-color.hover data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
+        .center Gold
+      .tag-storage.center.hover data-name="Storage Size" data-description="The storage size of the product."
+          span.no-size 64GB
+  .tag
+    .tag-top
+      .cart-status.hover data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
+        .icon +
+      .cart-added ADDED
+    .tag-left
+      .manufacturer-name.hover data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
+      .tag-name.hover data-name="Product Name" data-description="The name of the product." iPhone 6
+      .barcode
+        .tag-barcode.hover data-name="Barcode" data-description="The barcode represenation of the model number." =  raw(Barby::Code128B.new("AUHOA43AT").to_svg(height: 50))
+        .tag-model.hover data-name="Model Number" data-description="The product's model number." AUHOA43AT
+    .tag-right
+      .tag-color.hover data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
+        .center Gold
+      .tag-storage.center.hover data-name="Storage Size" data-description="The storage size of the product."
+          span.no-size 64GB

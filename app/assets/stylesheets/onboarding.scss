@@ -4,10 +4,10 @@
 
 .example-tag {
   .tag-name {
-    z-index: 14;
+    z-index: 100;
   }
   .tag-barcode {
-    z-index: 1;
+    z-index: 90;
   }
   background-color: white;
   @include media(850px){
@@ -27,20 +27,36 @@
   background-color: white;
 }
 
-.part-2, .part-3{
-  opacity: 0
+.part-3,.part-4{
+  display: none;
+}
+
+.part-2,.part-5 {
+  opacity: 0;
 }
 
 .important {
   font-weight: bold;
-  // color: rgb(0, 120, 231);
+}
+
+.messages {
+  height: 150px;
+}
+
+.title {
+  .divider {
+    color: lightgrey;
+  }
+  .important {
+    color: rgb(0, 120, 231);
+  }
 }
 
 .hover {
   @include transition(transform 0.2s);
   &:hover {
     cursor: pointer;
-    @include transform(scale(1.2))
+    @include transform(scale(1.1))
   }
 }
 
@@ -62,3 +78,8 @@
   }
 }
 
+.cart-callout, .plus-callout, .tag-callout, .next-callout {
+  font-weight: bold;
+  color: rgb(0, 120, 231);
+  cursor: pointer;
+}
