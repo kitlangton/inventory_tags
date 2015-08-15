@@ -7,6 +7,7 @@ class TagPdf < Prawn::Document
     @tag = tag
     @view = view
     @color_hex = @tag.hex
+    @color_hex = @color_hex.chars.shift.join
     text_box @tag.display_manufacturer,
       at: [-10,160],
       height: 50,
@@ -49,8 +50,8 @@ class TagPdf < Prawn::Document
     # old_cursor = cursor
     bounding_box([180,160], width: 160, height: 30) do
       stroke do
-        stroke_color @color_hex.to_s.chars[-6..-1].join
-        fill_color @color_hex.to_s.chars[-6..-1].join
+        stroke_color @color_hex
+        fill_color @color_hex
         fill_and_stroke_rectangle [cursor-bounds.height,cursor], bounds.width, bounds.height
       end
       stroke_color '000000'

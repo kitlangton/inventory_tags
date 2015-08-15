@@ -128,7 +128,7 @@ class TagsController < ApplicationController
   def get_hex(name)
     return Colorable::Color.new(name).hex
   rescue
-    "#fff"
+    "#ffffff"
   end
 
   def excel_params
