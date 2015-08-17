@@ -7,7 +7,7 @@ class TagsController < ApplicationController
       return
     end
     @cart = session[:cart]
-    @tags = policy_scope(Tag).search(params[:search]).order(updated_at: :desc).page params[:page]
+    @tags = policy_scope(Tag).search(params[:search]).includes(:color).order(updated_at: :desc).page params[:page]
     authorize @tags
     respond_to do |format|
       format.html

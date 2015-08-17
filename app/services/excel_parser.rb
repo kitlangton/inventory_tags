@@ -52,7 +52,7 @@ class ExcelParser
   def get_hex(name)
     return Colorable::Color.new(name).hex
   rescue
-    "#fff"
+    "#ffffff"
   end
 
   def parse_size(size)
