@@ -12,8 +12,8 @@ h3.center Some colors have not been recognized. Please assign swatches.
         tbody
           - @new_colors.each_with_index do |color, i|
             tr
+              = hidden_field_tag "colors[#{i}][id]", color.id
               td.color
-                = hidden_field_tag "colors[#{i}][id]", color.id
                 = color.name
                 = hidden_field_tag "colors[#{i}][name]", color.name
               td.swatch data-color=(color) contentEditable="" readonly="readonly"
