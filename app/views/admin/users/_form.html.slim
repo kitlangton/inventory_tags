@@ -1,0 +1,18 @@
+.container
+  .form
+    = simple_form_for [:admin,@user] do |f|
+        - if @user.errors.count > 0
+          .error-container
+            .errors
+              h4 Errors
+              - @user.errors.full_messages.each do |msg|
+                p =msg
+        = f.input :email, as: :string
+        br
+        = f.input :password
+        br
+        = f.input :role, collection: ["Store","Area"], default: 1
+        br
+        = f.input :area_id, collection: Area.all, default: 1
+        br
+        = f.submit class: "pure-button button-success", data: { disable_with: "Submitting..." }

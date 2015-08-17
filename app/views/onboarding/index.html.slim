@@ -55,7 +55,7 @@ h1.con
           br
           | Click 
           span.important Next 
-          | to advance to the next lesson.
+          | to advance to the first lesson.
 
   .container.part-2
     .message
@@ -65,12 +65,17 @@ h1.con
           a.next-3 Next
       .message-body
         | Here is an example of a 
-        span.important Tag
+        span.important.tag-callout Tag
         | .
         br
         br
         span.important Hover 
         | your mouse over the different parts of the tag to learn more.
+        br
+        br
+        | When you are done, click 
+        span.important Next 
+        | to continue.
   .container.part-3
     .message
       .message-header
@@ -84,18 +89,21 @@ h1.con
       .message-header
         | The Download Cart
       .message-body
-        | Notice how the 
+        | Notice how your 
         span.important.cart-callout Download Cart 
         | in the upper right corner of the screen now has 1 item in it?
         br
         br
-        | Click on it to go your download cart.
+        | Click on it to view your download cart.
   .container.part-5
     .message
       .message-header
         | Remove From The Cart
       .message-body
-        | I have added a few more tags to your cart so you can practice removing tags. Click on one of the 
+        | As you can see, I have added a few more tags to your cart. Try removing one of the tags. 
+        br
+        br
+        | Click on one of the 
         span.important x 
         | buttons to remove that tag from your cart.
   .container.part-6
@@ -103,9 +111,12 @@ h1.con
       .message-header
         | Download Your Tags
       .message-body
-        | Now that you've selected the tags you want to download, all that's left to do is to download your tags. Click the blue 
+        | Now that your cart is prepared, you can download your tags for printing. Click the blue 
         span.important Download All 
         | button.
+        br
+        br
+        .emphasis Since this is a tutorial, this will not actually download anything.
 
   h1.part-7.center
     = button_to "Complete Tutorial", onboard_user_path, class: 'pure-button button-success center complete-tutorial', method: :post
@@ -116,7 +127,7 @@ h1.con
       .message-body
         | You have finished the tutorial.. If you have any questions please email 
         a.important.plus-callout href="mailto:kit.langton@coloredge.com?Subject=Verizon%20Inventory%20Tag%20Support" Coloredge Technical Support
-        | . Click the giant
+        | . Click the giant 
         span.important Complete Tutorial 
         | button to enter the website.
 

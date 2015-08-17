@@ -26,6 +26,10 @@ class ColorsController < ApplicationController
   def update
     @color = Color.find(params[:id])
     if @color.update(color_params)
+      @color.tags.each do |t|
+        t.image.destroy
+        ImageWorker.perform_async(t.id)
+      end
       redirect_to tags_url
     else
       render :edit

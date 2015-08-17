@@ -6,8 +6,9 @@ class TagPdf < Prawn::Document
     scale 2
     @tag = tag
     @view = view
-    @color_hex = @tag.hex
-    @color_hex = @color_hex.chars.shift.join
+    @color_hex = @tag.hex.chars
+    @color_hex.shift
+    @color_hex = @color_hex.join
     text_box @tag.display_manufacturer,
       at: [-10,160],
       height: 50,

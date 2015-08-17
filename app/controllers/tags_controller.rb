@@ -7,7 +7,8 @@ class TagsController < ApplicationController
       return
     end
     @cart = session[:cart]
-    @tags = Tag.search(params[:search]).order(updated_at: :desc).page params[:page]
+    @tags = policy_scope(Tag).search(params[:search]).order(updated_at: :desc).page params[:page]
+    authorize @tags
     respond_to do |format|
       format.html
       format.json { render json: Tag.all.pluck(:manufacturer).uniq.map(&:downcase).map(&:capitalize) }
@@ -16,6 +17,7 @@ class TagsController < ApplicationController
 
   def new
     @tag = Tag.new
+    authorize @tag
   end
 
   def edit

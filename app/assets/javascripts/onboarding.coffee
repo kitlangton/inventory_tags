@@ -21,7 +21,10 @@ $ ->
         ]
 
   $('.plus-callout').click ->
-    $('.tag-top').velocity 'callout.bounce'
+    # $('.tag-top').velocity 'callout.bounce'
+    $('.cart-status').velocity(
+      color: '#fff'
+    ).velocity('reverse')
   if $('.anatomy').size() > 0
     $(".hover").hover(
       ->
@@ -38,6 +41,8 @@ $ ->
       $(".anatomy").velocity 'transition.slideDownOut',
         duration: 500
     $(".next-2").click ->
+      $('.tag-callout').click ->
+        $('.tag').velocity 'callout.bounce', 700
       $('.cart-status').unbind( 'click' )
       mySeq = [ { e: $(@).closest(".part-1"), p: "transition.slideUpOut" , o: { duration: 500}},
       { e: $(".part-2"), p: "transition.slideUpIn", o: { stagger: 300 } } ]
@@ -75,10 +80,9 @@ $ ->
           $("#cart-header").velocity 'callout.tada'
           $(".cart-callout").click ->
             $("#cart-header").velocity(
-              backgroundColor: '#FF0').velocity(
+              backgroundColor: '#0078E7').velocity(
               backgroundColor: '#FFF')
-                
-            $("#cart-header").velocity 'callout.tada'
+            $("#cart-header").velocity('stop').velocity 'callout.pulse'
           $("#cart-header").click ->
             $(@).unbind 'click'
             mySeq = [ { e: $(".part-4"), p: "transition.slideUpOut" , o: { duration: 500}}, { e: $(".part-2"), p: "transition.slideUpOut" , o: { duration: 500}},

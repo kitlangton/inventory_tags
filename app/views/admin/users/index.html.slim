@@ -1,0 +1,27 @@
+h1 Users
+
+.navbar
+  .link
+    = link_to "New User", new_admin_user_path
+
+.container
+  table.pure-table.pure-table-striped.center-table.user-table
+    thead
+      tr
+        th Email
+        th Type
+        th Area
+        th 
+    tbody
+      - @users.each do |user|
+        tr.user-row
+          td.email
+            = user.email
+          td.type
+            = user.role
+          td.area
+            = user.display_area
+          td.area
+            = link_to "Edit", edit_admin_user_path(user)
+            |  
+            = link_to "Delete", admin_user_path(user), method: :delete, data: {confirm: "Are you sure you want to delete this user"}

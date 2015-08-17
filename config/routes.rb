@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+  get 'users/index'
+  end
+
+  get 'admin_users/index'
+
+  resources :areas
   get 'cart/show'
 
   devise_for :users
@@ -29,6 +36,11 @@ Rails.application.routes.draw do
   get 'cart/tags', as: 'cart_tags', to: 'cart#cart_tags'
   get 'cart/download', as: 'download_cart', to: 'cart#download_cart'
   get 'cart/process', as: 'process_cart', to: 'cart#process_cart'
+
+  namespace :admin do
+    resources :users
+    patch 'users', to:'users#update'
+  end
 
   resources :tags
   resources :colors

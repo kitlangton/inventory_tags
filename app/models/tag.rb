@@ -8,6 +8,7 @@ class Tag < ActiveRecord::Base
   before_validation :prettify_data
   before_update :get_image
   belongs_to :color
+  belongs_to :area
   validates :name, presence: true
   validates :model, presence: true
   validates :manufacturer, presence: true

@@ -14,6 +14,10 @@ body {
   text-align: center;
 }
 
+
+.center-table {
+  margin: 0 auto;
+}
 .navbar {
   text-align: center;
   .link {
@@ -183,3 +187,55 @@ input[type="text"]:focus, input[type="password"]:focus {
   }
 }
 
+
+.pagination {
+  cursor: default;
+  .current, .gap {
+    cursor: default;
+    border-bottom: 1px solid grey;
+    text-decoration: none;
+    text-align: center;
+    background: white;
+    margin: 0px;
+  }
+  .gap {
+    padding: 0 2px;
+  }
+  .current {
+    color: $primary-color;
+    border-color: $primary-color;
+    position: relative;
+    bottom: 5px;
+    padding: 0 2px;
+  }
+  .page {
+    a {
+    @include transition(transform 0.3s);
+    position: relative;
+    &:hover{
+      bottom: 2px;
+      @include transform(translateY(-5px));
+    }}
+  }
+  .gap {
+    color: grey;
+  }
+  a {
+    border-bottom: 1px solid grey;
+    text-decoration: none;
+    text-align: center;
+    color: grey;
+    background: white;
+    padding: 0 2px 0 4px;
+    padding: 0 2px;
+    margin: 0px;
+    &:hover {
+      color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.emphasis {
+  font-style: italic;
+}

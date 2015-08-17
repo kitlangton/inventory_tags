@@ -16,7 +16,7 @@ class CartController < ApplicationController
   end
 
   def process_cart
-    @cart_tags.select { |t| t.image.size.nil? }.each do |tag|
+    @cart_tags.select { |t| !t.image.exists? }.each do |tag|
       tag.get_image
       tag.save
     end
