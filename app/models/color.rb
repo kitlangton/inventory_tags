@@ -1,7 +1,7 @@
 class Color < ActiveRecord::Base
   has_many :tags
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :hex, presence: true
 
   def dark?
