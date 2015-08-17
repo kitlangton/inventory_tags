@@ -2,7 +2,14 @@ require 'rails_helper'
 
 describe "Import from an excel document" do
   it "Imports from an excel doc" do
+    northeast = create(:area, name: 'Northeast')
+    area_user = create(:area_user, area: northeast)
+
     visit root_path
+
+    fill_in "Email", with: area_user.email
+    fill_in "Password", with: area_user.password
+    click_button "Sign In"
 
     click_link "Import Excel"
 
