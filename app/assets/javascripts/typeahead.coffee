@@ -5,12 +5,16 @@ $ ->
     colors = new Bloodhound(
       datumTokenizer: Bloodhound.tokenizers.whitespace
       queryTokenizer: Bloodhound.tokenizers.whitespace
-      prefetch: '/colors.json'
+      prefetch:
+        url: '/colors.json'
+        cache: false
     )
     manufacturers = new Bloodhound(
       datumTokenizer: Bloodhound.tokenizers.whitespace
       queryTokenizer: Bloodhound.tokenizers.whitespace
-      prefetch: '/tags.json'
+      prefetch:
+        url: '/tags.json'
+        cache: false
     )
 
     $('.typeahead-color').typeahead(null, {
