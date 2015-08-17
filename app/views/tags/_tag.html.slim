@@ -2,8 +2,9 @@
   .tag-top
     .left
       /= link_to "Download", tag_path(tag, format: "pdf")
-      - if current_user.admin?
+      - if policy(tag).update?
         = link_to "Edit", edit_tag_path(tag)
+      - if policy(tag).destroy?
         = link_to "Delete", tag_path(tag), method: :delete, data: { confirm: "Are you sure you want to delete this tag?"}
     .cart-status data-id=(tag.id) class=("added" if @cart.include?(tag.id.to_s))
       .icon +
@@ -17,7 +18,7 @@
   .tag-right
     - if tag.color
       .tag-color style="background-color:#{tag.hex}"
-        - if current_user.admin?
+        - if policy(tag.try(:color)).update?
           = link_to tag.display_color, edit_color_path(tag.color), class: ("dark" if tag.dark_color?)
         - else
           span class=("dark" if tag.dark_color?) = tag.display_color

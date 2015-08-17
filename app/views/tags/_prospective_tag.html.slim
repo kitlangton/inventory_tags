@@ -1,5 +1,6 @@
   tr class=("invalid" unless tag.valid?)
     td contentEditable=""
+      = hidden_field_tag "tags[#{i}][area_id]", current_user.area_id
       = tag.display_manufacturer
       = hidden_field_tag "tags[#{i}][manufacturer]", tag.manufacturer
     td contentEditable=""

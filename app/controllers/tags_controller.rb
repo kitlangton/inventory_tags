@@ -87,7 +87,7 @@ class TagsController < ApplicationController
     @tags = []
     @new_colors = []
     params[:tags].each do |k,v|
-      tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
+      tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], area_id: v[:area_id], complete: false)
       ImageWorker.perform_async(tag.id)
       @tags << tag
     end
@@ -106,6 +106,10 @@ class TagsController < ApplicationController
   def save_excel
     params[:colors].each do |k,v|
       c = Color.find(v[:id])
+      c.tags.each do |t|
+        t.image.destroy
+        ImageWorker.perform_async(t.id)
+      end
       c.update(name: v[:name], hex: v[:hex], complete: true)
     end
     redirect_to tags_url
@@ -134,11 +138,10 @@ class TagsController < ApplicationController
   end
 
   def excel_params
-    params.require(:tags).permit(:name, :model, :manufacturer, :size, :color)
+    params.require(:tags).permit(:name, :model, :manufacturer, :size, :color, :area_id)
   end
 
   def tag_params
-    params.require(:tag).permit(:name, :model, :manufacturer, :size)
+    params.require(:tag).permit(:name, :model, :manufacturer, :size, :area_id)
   end
-
 end

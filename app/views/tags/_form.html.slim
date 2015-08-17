@@ -1,30 +1,32 @@
 .container
   .form
     = form_for @tag do |f|
-        - if @tag.errors.count > 0
-          .error-container
-            .errors
-              h4 Errors
-              - @tag.errors.full_messages.each do |msg|
-                p =msg
-        = f.label :name
-        = f.text_field :name, placeholder: "Name"
-        br
-        = f.label :model
-        = f.text_field :model, placeholder: "Model"
+      - if current_user.area
+        = f.hidden_field :area_id, value: current_user.area_id
+      - if @tag.errors.count > 0
+        .error-container
+          .errors
+            h4 Errors
+            - @tag.errors.full_messages.each do |msg|
+              p =msg
+      = f.label :name
+      = f.text_field :name, placeholder: "Name"
+      br
+      = f.label :model
+      = f.text_field :model, placeholder: "Model"
 
-        br
-        = f.label :color
-        = f.text_field :color, placeholder: "Color", class: "typeahead-color typeahead"
+      br
+      = f.label :color
+      = f.text_field :color, placeholder: "Color", class: "typeahead-color typeahead"
 
-        br
-        br
-        = f.label :size
-        = f.text_field :size, placeholder: "Size"
+      br
+      br
+      = f.label :size
+      = f.text_field :size, placeholder: "Size"
 
-        br
-        = f.label :manufacturer
-        = f.text_field :manufacturer, placeholder: "Manufacturer", class: "typeahead-manufacturer typeahead"
-        br
-        br
-        = f.submit class: "pure-button button-success", data: { disable_with: "Submitting..." }
+      br
+      = f.label :manufacturer
+      = f.text_field :manufacturer, placeholder: "Manufacturer", class: "typeahead-manufacturer typeahead"
+      br
+      br
+      = f.submit class: "pure-button button-success", data: { disable_with: "Submitting..." }

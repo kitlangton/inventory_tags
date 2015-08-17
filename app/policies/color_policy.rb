@@ -1,4 +1,4 @@
-class TagPolicy < ApplicationPolicy
+class ColorPolicy < ApplicationPolicy
   def create?
     if user.role == "Area" || user.admin?
       true
@@ -21,13 +21,13 @@ class TagPolicy < ApplicationPolicy
     true
   end
 
-  class Scope < Scope
-    def resolve
-      if user.admin?
-        scope.all
-      else
-        scope.where(area: user.area)
-      end
-    end
-  end
+  # class Scope < Scope
+  #   def resolve
+  #     if user.admin?
+  #       scope.all
+  #     else
+  #       scope.where(area: user.area)
+  #     end
+  #   end
+  # end
 end
