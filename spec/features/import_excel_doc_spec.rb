@@ -22,9 +22,5 @@ describe "Import from an excel document" do
     expect(page).to have_content "APPLE"
     expect(page).to have_content "16GB"
   end
-
-  it "allows the user to edit the parsed tags" do
-
-  end
 end
 
