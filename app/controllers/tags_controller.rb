@@ -46,7 +46,7 @@ class TagsController < ApplicationController
     @tag.assign_attributes( color: find_color(params[:tag][:color]))
     if @tag.update(tag_params)
       ImageWorker.perform_async(@tag.id)
-      if @tag.color.complete == false
+      if @tag.color && @tag.color.complete == false
         redirect_to edit_color_path(@tag.color)
       else
         redirect_to tags_path
