@@ -12,17 +12,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    if user.admin?
-      true
-    elsif user.role == "Area"
-      if user.area == record.area
-        true
-      end
-    end
-  end
-
-  def set_area?
-    if user.admin?
+    if user.role == "Area" || user.admin?
       true
     end
   end
@@ -38,7 +28,7 @@ class UserPolicy < ApplicationPolicy
       if user.admin?
         scope.all
       else
-        scope.where(area: user.area)
+        scope.where.not(admin: true).where.not(role: "Area")
       end
     end
   end

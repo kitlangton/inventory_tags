@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe "Import from an excel document" do
   it "Imports from an excel doc" do
-    northeast = create(:area, name: 'Northeast')
-    area_user = create(:area_user, area: northeast)
+    area_user = create(:area_user)
 
     visit root_path
 
@@ -22,5 +21,6 @@ describe "Import from an excel document" do
     expect(page).to have_content "APPLE"
     expect(page).to have_content "16GB"
   end
+
 end
 

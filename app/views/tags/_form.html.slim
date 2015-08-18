@@ -1,8 +1,6 @@
 .container
   .form
     = form_for @tag do |f|
-      - if current_user.area
-        = f.hidden_field :area_id, value: current_user.area_id
       - if @tag.errors.count > 0
         .error-container
           .errors

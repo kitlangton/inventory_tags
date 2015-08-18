@@ -7,7 +7,7 @@ class TagsController < ApplicationController
       return
     end
     @cart = session[:cart]
-    @tags = policy_scope(Tag).search(params[:search]).includes(:color).order(updated_at: :desc).page params[:page]
+    @tags = Tag.search(params[:search]).includes(:color).order(updated_at: :desc).page params[:page]
     authorize @tags
     respond_to do |format|
       format.html
@@ -87,7 +87,7 @@ class TagsController < ApplicationController
     @tags = []
     @new_colors = []
     params[:tags].each do |k,v|
-      tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], area_id: v[:area_id], complete: false)
+      tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
       ImageWorker.perform_async(tag.id)
       @tags << tag
     end
@@ -138,10 +138,10 @@ class TagsController < ApplicationController
   end
 
   def excel_params
-    params.require(:tags).permit(:name, :model, :manufacturer, :size, :color, :area_id)
+    params.require(:tags).permit(:name, :model, :manufacturer, :size, :color)
   end
 
   def tag_params
-    params.require(:tag).permit(:name, :model, :manufacturer, :size, :area_id)
+    params.require(:tag).permit(:name, :model, :manufacturer, :size)
   end
 end

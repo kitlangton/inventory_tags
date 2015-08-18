@@ -1,9 +1,6 @@
 .title
   h1 =link_to tags_path do
     | Inventory Tags
-    - if current_user && current_user.area
-      |  
-      span.important = current_user.area.name
 
   - if current_user
     .user

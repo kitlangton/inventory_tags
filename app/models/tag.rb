@@ -9,7 +9,6 @@ class Tag < ActiveRecord::Base
   before_save :prettify_data
   after_destroy :expire_tag_all_cache
   belongs_to :color
-  belongs_to :area
   validates :name, presence: true
   validates :model, presence: true
   validates :manufacturer, presence: true

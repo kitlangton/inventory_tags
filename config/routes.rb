@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   get 'admin_users/index'
 
-  resources :areas
   get 'cart/show'
 
   devise_for :users

@@ -240,65 +240,10 @@ input[type="text"]:focus, input[type="password"]:focus {
   font-style: italic;
 }
 
-// .logo-bar {
-//   @include transition(transform 0.8s ease-in-out);
-// }
-.inventory-logo {
-  width: 10em;
-  height: 1.8em;
-  &:hover {
-    fill: $primary-color;
-  }
-  // @include transition(transform 0.3s);
-  // @include transform(translateX(-15px));
-  // .lb1 {
-  //   @include transform(translateX(13px));
-  // }
-  // .lb2 {
-  //   @include transform(translateX(6px));
-  // }
-  // .lb3 {
-  //   @include transform(translateX(8px));
-  // }
-  // .lb4 {
-  //   @include transform(translateX(23px));
-  // }
-  // .lb5 {
-  //   @include transform(translateX(20px));
-  // }
-  // &:hover {
-  //   color: $primary-color;
-  //   fill: $primary-color;
-  //   // @include transform(translateX(0px));
-  //   .lb1 {
-  //     @include transform(translateX(0px));
-  //   }
-  //   .lb2 {
-  //     @include transform(translateX(0px));
-  //   }
-  //   .lb3 {
-  //     @include transform(translateX(0px));
-  //   }
-  //   .lb4 {
-  //     @include transform(translateX(0px));
-  //   }
-  //   .lb5 {
-  //     @include transform(translateX(0px));
-  //   }
-  // }
-}
-
-// .area-name {
-//   position: relative;
-//   bottom: 19px;
-//   left: 10px;
-//   font-weight: normal;
-//   font-size: 0.8em;
-// }
-
 table {
   box-shadow: 0 4px 7px rgba(0,0,0,0.3);
 }
+
 .pure-table-striped {
   td.swatch {
     border-left: 1px solid grey;

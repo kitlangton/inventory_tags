@@ -21,13 +21,4 @@ class TagPolicy < ApplicationPolicy
     true
   end
 
-  class Scope < Scope
-    def resolve
-      if user.admin?
-        scope.all
-      else
-        scope.where(area: user.area)
-      end
-    end
-  end
 end

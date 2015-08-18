@@ -13,11 +13,5 @@
         - if policy(@user).set_role?
           br
           = f.input :role, collection: ["Store","Area"], default: 1
-        - if policy(@user).set_area?
-          br
-          = f.input :area_id, collection: Area.all, default: 1
-        - else
-          br
-          = f.input :area_id, as: :hidden, input_html: {value: current_user.area_id }
         br
         = f.submit class: "pure-button button-success", data: { disable_with: "Submitting..." }

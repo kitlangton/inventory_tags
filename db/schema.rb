@@ -11,16 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817051016) do
+ActiveRecord::Schema.define(version: 20150818183350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "areas", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "colors", force: :cascade do |t|
     t.string   "name"
@@ -51,10 +45,8 @@ ActiveRecord::Schema.define(version: 20150817051016) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "area_id"
   end
 
-  add_index "tags", ["area_id"], name: "index_tags_on_area_id", using: :btree
   add_index "tags", ["color_id"], name: "index_tags_on_color_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -72,15 +64,11 @@ ActiveRecord::Schema.define(version: 20150817051016) do
     t.datetime "updated_at",                               null: false
     t.boolean  "admin",                  default: false
     t.boolean  "onboarded",              default: false
-    t.integer  "area_id"
     t.string   "role",                   default: "Store"
   end
 
-  add_index "users", ["area_id"], name: "index_users_on_area_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "tags", "areas"
   add_foreign_key "tags", "colors"
-  add_foreign_key "users", "areas"
 end

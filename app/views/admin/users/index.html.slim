@@ -10,7 +10,6 @@ h1 Users
       tr
         th Email
         th Type
-        th Area
         th 
     tbody
       - @users.each do |user|
@@ -19,9 +18,7 @@ h1 Users
             = user.email
           td.type
             = user.role
-          td.area
-            = user.display_area
-          td.area
+          td.edit
             = link_to "Edit", edit_admin_user_path(user)
             - if policy(user).destroy?
               |  
