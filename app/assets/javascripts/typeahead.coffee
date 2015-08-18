@@ -1,5 +1,3 @@
-typeAhead = ->
-
 $ ->
   if $(".typeahead").size() > 0
     colors = new Bloodhound(

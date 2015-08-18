@@ -41,6 +41,7 @@ gem 'redis'
 gem 'nprogress-rails'
 gem 'dalli'
 gem 'memcachier'
+gem 'rack-mini-profiler'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
