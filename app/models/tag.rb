@@ -79,7 +79,7 @@ class Tag < ActiveRecord::Base
     if search
       where("name ILIKE ?", "%#{search}%")
     else
-      all_cached
+      all
     end
   end
 
