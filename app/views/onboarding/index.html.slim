@@ -1,203 +1,204 @@
-.title
-  h1
-    | Inventory Tags 
-    span.important Tutorial
+- cache 'onboarding' do
+  .title
+    h1
+      | Inventory Tags 
+      span.important Tutorial
 
-  .user
-    .pure-menu.pure-menu-horizontal
-      ul.pure-menu-list
-        li.pure-menu-item class=("pure-menu-selected" if controller.controller_name == "tags" && controller.action_name == "index")
-          = link_to "End Tutorial", onboard_user_path, class: "pure-menu-link", method: :post
-        li.pure-menu-item#cart-header class=("pure-menu-selected" if controller.controller_name == "cart")
-          = link_to "#", class: "pure-menu-link" do
-            | Cart
-            | : 
-            span.cart-size data-size=0 0
-        li.pure-menu-item.pure-menu-has-children.pure-menu-allow-hover
-          = link_to current_user.email, "#", class: "pure-menu-link"
-          ul.pure-menu-children
-            li.pure-menu-item
-              = link_to "Sign Out", destroy_user_session_path, class: "pure-menu-link", method: :delete
+    .user
+      .pure-menu.pure-menu-horizontal
+        ul.pure-menu-list
+          li.pure-menu-item class=("pure-menu-selected" if controller.controller_name == "tags" && controller.action_name == "index")
+            = link_to "End Tutorial", onboard_user_path, class: "pure-menu-link", method: :post
+          li.pure-menu-item#cart-header class=("pure-menu-selected" if controller.controller_name == "cart")
+            = link_to "#", class: "pure-menu-link" do
+              | Cart
+              | : 
+              span.cart-size data-size=0 0
+          li.pure-menu-item.pure-menu-has-children.pure-menu-allow-hover
+            = link_to current_user.email, "#", class: "pure-menu-link"
+            ul.pure-menu-children
+              li.pure-menu-item
+                = link_to "Sign Out", destroy_user_session_path, class: "pure-menu-link", method: :delete
 
-h1.con
-  span.congrats C
-  span.congrats O
-  span.congrats N
-  span.congrats G
-  span.congrats R
-  span.congrats A
-  span.congrats T
-  span.congrats U
-  span.congrats L
-  span.congrats A
-  span.congrats T
-  span.congrats I
-  span.congrats O
-  span.congrats N
-  span.congrats S
+  h1.con
+    span.congrats C
+    span.congrats O
+    span.congrats N
+    span.congrats G
+    span.congrats R
+    span.congrats A
+    span.congrats T
+    span.congrats U
+    span.congrats L
+    span.congrats A
+    span.congrats T
+    span.congrats I
+    span.congrats O
+    span.congrats N
+    span.congrats S
 
-.messages
-  h1.part-5 Download Cart
-  .part-6.center
-    button.pure-button.pure-button-primary.download-all Download All
-  .part-1
-    .container
+  .messages
+    h1.part-5 Download Cart
+    .part-6.center
+      button.pure-button.pure-button-primary.download-all Download All
+    .part-1
+      .container
+        .message
+          .message-header
+            | Welcome
+            .next.next-2
+              a Next
+          .message-body
+            | Welcome to the 
+            span.important Verizon Inventory Tags 
+            | Website.
+            br
+            br
+            | Click 
+            span.important Next 
+            | to advance to the first lesson.
+
+    .container.part-2
       .message
         .message-header
-          | Welcome
-          .next.next-2
-            a Next
+          | Anatomy of a Tag
+          .next
+            a.next-3 Next
         .message-body
-          | Welcome to the 
-          span.important Verizon Inventory Tags 
-          | Website.
+          | Here is an example of a 
+          span.important.tag-callout Tag
+          | .
           br
           br
-          | Click 
+          span.important Hover 
+          | your mouse over the different parts of the tag to learn more.
+          br
+          br
+          | When you are done, click 
           span.important Next 
-          | to advance to the first lesson.
+          | to continue.
+    .container.part-3
+      .message
+        .message-header
+          | Add To The Cart
+        .message-body
+          | Click the 
+          span.important.plus-callout + 
+          | button in the upper right-hand corner of the tag to add it to your download cart.
+    .container.part-4
+      .message
+        .message-header
+          | The Download Cart
+        .message-body
+          | Notice how your 
+          span.important.cart-callout Download Cart 
+          | in the upper right corner of the screen now has 1 item in it?
+          br
+          br
+          | Click on it to view your download cart.
+    .container.part-5
+      .message
+        .message-header
+          | Remove From The Cart
+        .message-body
+          | As you can see, I have added a few more tags to your cart. Try removing one of the tags. 
+          br
+          br
+          | Click on one of the 
+          span.important x 
+          | buttons to remove that tag from your cart.
+    .container.part-6
+      .message
+        .message-header
+          | Download Your Tags
+        .message-body
+          | Now that your cart is prepared, you can download your tags for printing. Click the blue 
+          span.important Download All 
+          | button.
+          br
+          br
+          .emphasis Since this is a tutorial, this will not actually download anything.
 
-  .container.part-2
-    .message
-      .message-header
-        | Anatomy of a Tag
-        .next
-          a.next-3 Next
-      .message-body
-        | Here is an example of a 
-        span.important.tag-callout Tag
-        | .
-        br
-        br
-        span.important Hover 
-        | your mouse over the different parts of the tag to learn more.
-        br
-        br
-        | When you are done, click 
-        span.important Next 
-        | to continue.
-  .container.part-3
-    .message
-      .message-header
-        | Add To The Cart
-      .message-body
-        | Click the 
-        span.important.plus-callout + 
-        | button in the upper right-hand corner of the tag to add it to your download cart.
-  .container.part-4
-    .message
-      .message-header
-        | The Download Cart
-      .message-body
-        | Notice how your 
-        span.important.cart-callout Download Cart 
-        | in the upper right corner of the screen now has 1 item in it?
-        br
-        br
-        | Click on it to view your download cart.
-  .container.part-5
-    .message
-      .message-header
-        | Remove From The Cart
-      .message-body
-        | As you can see, I have added a few more tags to your cart. Try removing one of the tags. 
-        br
-        br
-        | Click on one of the 
-        span.important x 
-        | buttons to remove that tag from your cart.
-  .container.part-6
-    .message
-      .message-header
-        | Download Your Tags
-      .message-body
-        | Now that your cart is prepared, you can download your tags for printing. Click the blue 
-        span.important Download All 
-        | button.
-        br
-        br
-        .emphasis Since this is a tutorial, this will not actually download anything.
+    h1.part-7.center
+      = button_to "Complete Tutorial", onboard_user_path, class: 'pure-button button-success center complete-tutorial', method: :post
+    .container.part-7
+      .message
+        .message-header
+          | Tutorial Complete
+        .message-body
+          | You have finished the tutorial.. If you have any questions please email 
+          a.important.plus-callout href="mailto:kit.langton@coloredge.com?Subject=Verizon%20Inventory%20Tag%20Support" Coloredge Technical Support
+          | . Click the giant 
+          span.important Complete Tutorial 
+          | button to enter the website.
 
-  h1.part-7.center
-    = button_to "Complete Tutorial", onboard_user_path, class: 'pure-button button-success center complete-tutorial', method: :post
-  .container.part-7
-    .message
-      .message-header
-        | Tutorial Complete
-      .message-body
-        | You have finished the tutorial.. If you have any questions please email 
-        a.important.plus-callout href="mailto:kit.langton@coloredge.com?Subject=Verizon%20Inventory%20Tag%20Support" Coloredge Technical Support
-        | . Click the giant 
-        span.important Complete Tutorial 
-        | button to enter the website.
+  .tags-container.part-2
+    .tag.example-tag
+      .anatomy.no
+        .name
+        .description
+      .tag-top
+        .cart-status.hover data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
+          .icon +
+        .cart-added ADDED
+      .tag-left
+        .manufacturer-name.hover data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
+        .tag-name.hover data-name="Product Name" data-description="The name of the product." iPhone 6
+        .barcode
+          .tag-barcode.hover data-name="Barcode" data-description="The barcode represenation of the model number." = barby_svg("AUHOA45AT")
+          .tag-model.hover data-name="Model Number" data-description="The product's model number." AUHOA43AT
+      .tag-right
+        .tag-color.hover data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
+          .center Gold
+        .tag-storage.center.hover data-name="Storage Size" data-description="The storage size of the product."
+            span.no-size 64GB
 
-.tags-container.part-2
-  .tag.example-tag
-    .anatomy.no
-      .name
-      .description
-    .tag-top
-      .cart-status.hover data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
-        .icon +
-      .cart-added ADDED
-    .tag-left
-      .manufacturer-name.hover data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
-      .tag-name.hover data-name="Product Name" data-description="The name of the product." iPhone 6
-      .barcode
-        .tag-barcode.hover data-name="Barcode" data-description="The barcode represenation of the model number." = barby_svg("AUHOA45AT")
-        .tag-model.hover data-name="Model Number" data-description="The product's model number." AUHOA43AT
-    .tag-right
-      .tag-color.hover data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
-        .center Gold
-      .tag-storage.center.hover data-name="Storage Size" data-description="The storage size of the product."
-          span.no-size 64GB
-
-.tags-container.part-5
-  .tag
-    .tag-top
-      .cart-status data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
-        .icon +
-      .cart-added ADDED
-    .tag-left
-      .manufacturer-name data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
-      .tag-name data-name="Product Name" data-description="The name of the product." iPhone 6
-      .barcode
-        .tag-barcode data-name="Barcode" data-description="The barcode represenation of the model number." =  barby_svg("AUHCE38CH")
-        .tag-model data-name="Model Number" data-description="The product's model number." AUHCE38CH
-    .tag-right
-      .tag-color data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
-        .center Gold
-      .tag-storage.center data-name="Storage Size" data-description="The storage size of the product."
-          span.no-size 16GB
-  .tag
-    .tag-top
-      .cart-status data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
-        .icon +
-      .cart-added ADDED
-    .tag-left
-      .manufacturer-name data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
-      .tag-name data-name="Product Name" data-description="The name of the product." iPhone 6
-      .barcode
-        .tag-barcode data-name="Barcode" data-description="The barcode represenation of the model number." =  barby_svg("AUHED82UC")
-        .tag-model data-name="Model Number" data-description="The product's model number." AUHED82UC
-    .tag-right
-      .tag-color data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
-        .center Gold
-      .tag-storage.center data-name="Storage Size" data-description="The storage size of the product."
-          span.no-size 64GB
-  .tag
-    .tag-top
-      .cart-status data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
-        .icon +
-      .cart-added ADDED
-    .tag-left
-      .manufacturer-name data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
-      .tag-name data-name="Product Name" data-description="The name of the product." iPhone 6
-      .barcode
-        .tag-barcode data-name="Barcode" data-description="The barcode represenation of the model number." =  barby_svg("AUHOA45AT")
-        .tag-model data-name="Model Number" data-description="The product's model number." AUHOA43AT
-    .tag-right
-      .tag-color data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
-        .center Gold
-      .tag-storage.center data-name="Storage Size" data-description="The storage size of the product."
-          span.no-size 64GB
+  .tags-container.part-5
+    .tag
+      .tag-top
+        .cart-status data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
+          .icon +
+        .cart-added ADDED
+      .tag-left
+        .manufacturer-name data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
+        .tag-name data-name="Product Name" data-description="The name of the product." iPhone 6
+        .barcode
+          .tag-barcode data-name="Barcode" data-description="The barcode represenation of the model number." =  barby_svg("AUHCE38CH")
+          .tag-model data-name="Model Number" data-description="The product's model number." AUHCE38CH
+      .tag-right
+        .tag-color data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
+          .center Gold
+        .tag-storage.center data-name="Storage Size" data-description="The storage size of the product."
+            span.no-size 16GB
+    .tag
+      .tag-top
+        .cart-status data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
+          .icon +
+        .cart-added ADDED
+      .tag-left
+        .manufacturer-name data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
+        .tag-name data-name="Product Name" data-description="The name of the product." iPhone 6
+        .barcode
+          .tag-barcode data-name="Barcode" data-description="The barcode represenation of the model number." =  barby_svg("AUHED82UC")
+          .tag-model data-name="Model Number" data-description="The product's model number." AUHED82UC
+      .tag-right
+        .tag-color data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
+          .center Gold
+        .tag-storage.center data-name="Storage Size" data-description="The storage size of the product."
+            span.no-size 64GB
+    .tag
+      .tag-top
+        .cart-status data-name="Add To Cart" data-description="Clicking this button will add the tag to the download cart."
+          .icon +
+        .cart-added ADDED
+      .tag-left
+        .manufacturer-name data-name="Manufacturer" data-description="The name of the manufacturer." APPLE
+        .tag-name data-name="Product Name" data-description="The name of the product." iPhone 6
+        .barcode
+          .tag-barcode data-name="Barcode" data-description="The barcode represenation of the model number." =  barby_svg("AUHOA45AT")
+          .tag-model data-name="Model Number" data-description="The product's model number." AUHOA43AT
+      .tag-right
+        .tag-color data-name="Color" data-description="The name and hue of the product's color."style="background-color: gold"
+          .center Gold
+        .tag-storage.center data-name="Storage Size" data-description="The storage size of the product."
+            span.no-size 64GB
