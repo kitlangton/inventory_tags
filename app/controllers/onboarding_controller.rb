@@ -1,4 +1,6 @@
 class OnboardingController < ApplicationController
+  set caches_page :index
+
   def index
     render layout: 'onboarding'
   end
