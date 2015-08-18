@@ -5,8 +5,9 @@ require 'barby/outputter/svg_outputter'
 
 class Tag < ActiveRecord::Base
   paginates_per 15
-  before_validation :prettify_data
-  before_update :get_image
+  after_save :expire_tag_all_cache
+  before_save :prettify_data
+  after_destroy :expire_tag_all_cache
   belongs_to :color
   belongs_to :area
   validates :name, presence: true
@@ -74,12 +75,11 @@ class Tag < ActiveRecord::Base
     barcode.to_png(height: height, xdim: 2)
   end
 
-
   def self.search(search)
     if search
       where("name ILIKE ?", "%#{search}%")
     else
-      all
+      all_cached
     end
   end
 
@@ -93,6 +93,14 @@ class Tag < ActiveRecord::Base
     else
       self.image.path
     end
+  end
+
+  def self.all_cached
+    Rails.cache.fetch('Tag.all') { all }
+  end
+
+  def expire_tag_all_cache
+    Rails.cache.delete('Tag.all')
   end
 
 end

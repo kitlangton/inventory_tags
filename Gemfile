@@ -39,7 +39,8 @@ gem 'figaro'
 gem 'sidekiq'
 gem 'redis'
 gem 'nprogress-rails'
-
+gem 'dalli'
+gem 'memcachier'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
