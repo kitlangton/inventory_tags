@@ -1,28 +1,43 @@
-# ExcelTagsParser parses a hash of tags from a properly formatted xlsx document
-
 require 'rubyXL'
 class ExcelTagsParser
   attr_accessor :tags
 
-  def initialize(document)
+  def initialize(document, *headings)
     @document = document
+    @headings = headings
     @tags = []
+    p headings
   end
 
   def parse
-    excel_rows[row_after_headers..-1].each do |row|
-      next unless row[manufacturer_column] && row[model_column] && row[name_column] && row[color_column] && row[size_column]
-      next if no_name?(row) || no_manufacturer?(row)
-      tags << {manufacturer: get_value(row, 'manufacturer'),
-               model: get_value(row, 'model'),
-               name: get_value(row, 'name'),
-               color: get_value(row, 'color'),
-               size: get_value(row, 'size', integer: true)}
+    each_valid_excel_row do |row|
+      tags << { manufacturer: get_value(row, 'manufacturer'),
+                model: get_value(row, 'model'),
+                name: get_value(row, 'name'),
+                color: get_value(row, 'color'),
+                size: get_value(row, 'size', integer: true) }
     end
     self
   end
 
   private
+
+  def each_valid_excel_row
+    excel_rows[row_after_headers..-1].each do |row|
+      yield(row) unless invalid_row?(row)
+    end
+  end
+
+  def invalid_row?(row)
+    no_name?(row) || no_manufacturer?(row) && !full_row?(row)
+  end
+
+  def full_row?(row)
+    [manufacturer_column, model_column, name_column, color_column, size_column].each do |column|
+      return false unless row[column]
+    end
+    true
+  end
 
   def get_value(row, title, integer: false)
     value = parse_value(row[send("#{title}_column")].value)
@@ -60,10 +75,6 @@ class ExcelTagsParser
     end
   end
 
-  def row_full?(row)
-    row[0] && row[1] && row[2] && row[3] && row[4]
-  end
-
   def excel_rows
     book = RubyXL::Parser.parse @document
     sheet = book.worksheets[0]
@@ -83,7 +94,7 @@ class ExcelTagsParser
 
     col = instance_variable_get("@#{m}")
     unless col
-      col = column_for($1.to_sym)
+      col = column_for(Regexp.last_match(1).to_sym)
       instance_variable_set("@#{m}", col)
     end
     col
