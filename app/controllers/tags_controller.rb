@@ -11,6 +11,7 @@ class TagsController < ApplicationController
     authorize @tags
     respond_to do |format|
       format.html
+      format.js
       format.json { render json: Tag.all.pluck(:manufacturer).uniq.map(&:downcase).map(&:capitalize) }
     end
   end
@@ -74,18 +75,22 @@ class TagsController < ApplicationController
   end
 
   def new_excel_import
+    authorize Tag, :create?
   end
 
   def import_excel
     uploaded_file = params[:import][:excel_doc]
     file_name = uploaded_file.tempfile.to_path.to_s
-    data = ExcelParser.new(file_name).parse.data
-    @tags = data
+    @tags = []
+    tags = ExcelTagsParser.new(file_name).parse.tags
+    tags.each do |tag|
+      tag[:color] = Color.find_or_initialize_by(name: tag[:color])
+      @tags << Tag.new(tag)
+    end
   end
 
   def submit_excel
     @tags = []
-    @new_colors = []
     params[:tags].each do |k,v|
       tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
       ImageWorker.perform_async(tag.id)
@@ -93,9 +98,9 @@ class TagsController < ApplicationController
     end
 
     if @tags.any? { |t| t.color.try(:complete) == false }
-      redirect_to confirm_colors_url
+      redirect_to confirm_colors_url, flash: { success: "Your tags have been created successfully." }
     else
-      redirect_to tags_url
+      redirect_to tags_url, flash: { success: "Your tags have been created successfully." }
     end
   end
 

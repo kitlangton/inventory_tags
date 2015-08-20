@@ -275,3 +275,53 @@ table {
     background-color: white;
   }
 }
+
+
+.alert {
+  @include transition(transform 0.3s);
+  &.alert-alert {
+    // border: solid 4px #900;
+    // background-color: #FF6565;
+    background-color: $primary-color;
+    color: white;
+  }
+  &.alert-error {
+    // border: solid 4px #900;
+    // background-color: #FF6565;
+    background-color: $primary-color;
+    color: white;
+  }
+  &.alert-notice {
+    // border: solid 4px #26722D;
+    // background-color: #A4E7A0;
+    background-color: $primary-color;
+    color: white;
+  }
+  &.alert-success {
+    // border: solid 4px #26722D;
+    background-color: $primary-color;
+    color: white;
+  }
+  text-align: center;
+  padding: 4px 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: black;
+  z-index: 999;
+  position: fixed;
+  // font-weight: bold;
+  top: 0;
+  width: 50%;
+  left: 25%;
+  p {
+    font-size: 110%;
+    margin: 15px 0;
+  }
+  box-shadow: 0px 3px 7px rgba(0,0,0,0.2);
+  &.hide {
+  @include transform(translateY(-37px));
+  }
+}
+
+
+

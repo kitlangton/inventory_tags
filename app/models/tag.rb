@@ -78,7 +78,7 @@ class Tag < ActiveRecord::Base
     if search
       where("name ILIKE ?", "%#{search}%")
     else
-      all
+      where(nil)
     end
   end
 

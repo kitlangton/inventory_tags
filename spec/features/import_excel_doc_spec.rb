@@ -1,20 +1,18 @@
 require 'rails_helper'
 
-describe "Import from an excel document" do
-  it "Imports from an excel doc" do
-    area_user = create(:area_user)
+feature "Area user imports tags from an excel doc" do
+  scenario "is redirected away if if not an area user" do
+    sign_in_as(create(:store_user))
 
-    visit root_path
+    visit new_excel_import_path
+    expect(current_path).to eq root_path
+  end
 
-    fill_in "Email", with: area_user.email
-    fill_in "Password", with: area_user.password
-    click_button "Sign In"
+  scenario "successfully" do
+    sign_in_as(create(:area_user))
 
     click_link "Import Excel"
-
-    file = File.expand_path("../fixtures/test.xlsx", __dir__)
-
-    attach_file('import_excel_doc', file)
+    attach_valid_excel
     click_button "Import From Excel"
 
     expect(page).to have_content "iPhone 4S"
@@ -22,5 +20,24 @@ describe "Import from an excel document" do
     expect(page).to have_content "16GB"
   end
 
+  # scenario "and submits the excel" do
+  #   sign_in_as(create(:area_user))
+  #
+  #   click_link "Import Excel"
+  #   attach_valid_excel
+  #   click_button "Import From Excel"
+  #
+  #   click_button "Create Tags"
+  #   expect(page).to have_css ".alert-success", text: "Your tags have been created successfully."
+  #   expect(page).to have_content "White CPO"
+  #   expect(current_path).to eq confirm_colors_path
+  # end
+
+  # scenario "with an invalid excel"
+
+  def attach_valid_excel
+    file = File.expand_path("../fixtures/test.xlsx", __dir__)
+    attach_file('import_excel_doc', file)
+  end
 end
 

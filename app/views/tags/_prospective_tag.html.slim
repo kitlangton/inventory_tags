@@ -1,4 +1,4 @@
-  tr class=("invalid" unless tag.valid?)
+  tr
     td contentEditable=""
       = tag.display_manufacturer
       = hidden_field_tag "tags[#{i}][manufacturer]", tag.manufacturer

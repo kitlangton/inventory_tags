@@ -1,11 +1,11 @@
 require 'rubyXL'
 
-class ExcelParser
-  attr_reader :data
+class ExcelTagsParser
+  attr_accessor :tags
 
   def initialize(document)
     @document = document
-    @data = []
+    @tags = []
   end
 
   def parse
@@ -18,14 +18,14 @@ class ExcelParser
       if row[2].value.nil?
         next
       end
-      @data << Tag.new(manufacturer: parse_value(row[0].value),
+      tags << {manufacturer: parse_value(row[0].value),
                            model: parse_model(row[1].value),
                            name: parse_value(row[2].value),
                            color: parse_color(row[3].value),
-                           size: parse_size(row[4].value))
+                           size: parse_size(row[4].value)}
     end
-    @data.reject! { |item| item.name == "" }
-    @data.shift
+    tags.reject! { |item| item[:name] == "" }
+    tags.shift
     self
   end
 
@@ -44,9 +44,9 @@ class ExcelParser
 
   def parse_color(color)
     color = parse_value(color)
-    found = Color.where(name: color).first
-    return found if found
-    Color.new(name: "#{color}", hex: get_hex(color), complete: false)
+    # found = Color.where(name: color).first
+    # return found if found
+    # Color.new(name: "#{color}", hex: get_hex(color), complete: false)
   end
 
   def get_hex(name)
