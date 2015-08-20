@@ -45,6 +45,7 @@ module ExcelParser
     end
 
     def process(value)
+      return unless value
       case type
       when :string
         value.strip.chomp
@@ -117,8 +118,9 @@ module ExcelParser
     end
 
     def valid_row?(row)
-      headings.select(&:required?).each do |heading|
-        return false if row[heading.column].value.nil?
+      headings.each do |heading|
+        return false if row[heading.column].nil?
+        return false if heading.required? && row[heading.column].value.nil?
       end
       true
     end
@@ -126,7 +128,7 @@ module ExcelParser
     def each_cell
       excel_rows.each do |row|
         row.cells.each do |cell|
-          yield(cell) if cell.value
+          yield(cell) if cell && cell.value
         end
       end
     end
