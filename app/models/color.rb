@@ -5,7 +5,7 @@ class Color < ActiveRecord::Base
   validates :hex, presence: true
 
   def dark?
-    h,s,b = Colorable::Color.new(self.hex).hsb
+    _,_,b = Colorable::Color.new(self.hex).hsb
     b < 50
   end
 

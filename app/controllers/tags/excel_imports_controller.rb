@@ -18,7 +18,7 @@ class Tags::ExcelImportsController < ApplicationController
   def create
     authorize Tag, :create?
     @tags = []
-    params[:tags].each do |k,v|
+    params[:tags].each do |_,v|
       tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
       ImageWorker.perform_async(tag.id)
       @tags << tag
@@ -32,7 +32,7 @@ class Tags::ExcelImportsController < ApplicationController
   end
 
   def save_excel
-    params[:colors].each do |k,v|
+    params[:colors].each do |_,v|
       c = Color.find(v[:id])
       c.tags.each do |t|
         t.image.destroy

@@ -1,3 +1,5 @@
+# ExcelTagsParser parses a hash of tags from a properly formatted xlsx document
+
 require 'rubyXL'
 class ExcelTagsParser
   attr_accessor :tags
@@ -12,10 +14,10 @@ class ExcelTagsParser
       next unless row[manufacturer_column] && row[model_column] && row[name_column] && row[color_column] && row[size_column]
       next if no_name?(row) || no_manufacturer?(row)
       tags << {manufacturer: get_value(row, 'manufacturer'),
-                           model: get_value(row, 'model'),
-                           name: get_value(row, 'name'),
-                           color: get_value(row, 'color'),
-                           size: get_value(row, 'size', integer: true)}
+               model: get_value(row, 'model'),
+               name: get_value(row, 'name'),
+               color: get_value(row, 'color'),
+               size: get_value(row, 'size', integer: true)}
     end
     self
   end
@@ -24,17 +26,13 @@ class ExcelTagsParser
 
   def get_value(row, title, integer: false)
     value = parse_value(row[send("#{title}_column")].value)
-    if integer
-      return parse_size(value)
-    end
+    return parse_size(value) if integer
     value
   end
 
   def cell_for(title)
     each_cell do |cell|
-      if cell.value.downcase =~ /#{title.to_s}/
-        return cell
-      end
+      return cell if cell.value.downcase =~ /#{title.to_s}/
     end
   end
 
@@ -73,25 +71,21 @@ class ExcelTagsParser
   end
 
   def parse_value(value)
-    if value && value != "N/A"
-      value.strip
-    end
+    value.strip if value && value != 'N/A'
   end
 
   def parse_size(size)
-    if size
-      size.scan(/\d/).join.to_i
-    end
+    size.scan(/\d/).join.to_i if size
   end
 
-  def method_missing(m, *args, &block)
-    if m =~ /(\w+)_column/
-      col = instance_variable_get("@#{m}")
-      unless col
-        col = column_for($1.to_sym)
-        instance_variable_set("@#{m}", col)
-      end
-      return col
+  def method_missing(m)
+    return false unless m =~ /(\w+)_column/
+
+    col = instance_variable_get("@#{m}")
+    unless col
+      col = column_for($1.to_sym)
+      instance_variable_set("@#{m}", col)
     end
+    col
   end
 end
