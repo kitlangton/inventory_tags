@@ -2,101 +2,139 @@ require 'rubyXL'
 class ExcelTagsParser
   attr_accessor :tags
 
-  def initialize(document, *headings)
+  def initialize(document)
     @document = document
-    @headings = headings
     @tags = []
-    p headings
   end
 
   def parse
-    each_valid_excel_row do |row|
-      tags << { manufacturer: get_value(row, 'manufacturer'),
-                model: get_value(row, 'model'),
-                name: get_value(row, 'name'),
-                color: get_value(row, 'color'),
-                size: get_value(row, 'size', integer: true) }
+    parser = ExcelParser::Parser.new(@document)
+    parser.config do |p|
+      p.heading 'Name', type: :string, required: true
+      p.heading 'Manufacturer', type: :string, required: true
+      p.heading 'Model', type: :string, required: false
+      p.heading 'Color', type: :string, required: false
+      p.heading 'Size', type: :integer, required: false
     end
+    @tags = parser.parse.tags
     self
   end
+end
 
-  private
-
-  def each_valid_excel_row
-    excel_rows[row_after_headers..-1].each do |row|
-      yield(row) unless invalid_row?(row)
+module ExcelParser
+  class Heading
+    attr_reader :name, :type
+    attr_accessor :cell
+    def initialize(name, type: :string, required: false)
+      @requried = required
+      @name = name.downcase
+      @type = type
+      @cell = nil
     end
-  end
 
-  def invalid_row?(row)
-    no_name?(row) || no_manufacturer?(row) && !full_row?(row)
-  end
-
-  def full_row?(row)
-    [manufacturer_column, model_column, name_column, color_column, size_column].each do |column|
-      return false unless row[column]
+    def required?
+      @requried
     end
-    true
-  end
 
-  def get_value(row, title, integer: false)
-    value = parse_value(row[send("#{title}_column")].value)
-    return parse_size(value) if integer
-    value
-  end
-
-  def cell_for(title)
-    each_cell do |cell|
-      return cell if cell.value.downcase =~ /#{title.to_s}/
+    def column
+      @cell.column
     end
-  end
 
-  def row_after_headers
-    cell_for(:name).row + 1
-  end
+    def row
+      @cell.row
+    end
 
-  def no_name?(row)
-    row[name_column].value.nil?
-  end
-
-  def no_manufacturer?(row)
-    row[manufacturer_column].value.nil?
-  end
-
-  def column_for(title)
-    cell_for(title).column
-  end
-
-  def each_cell
-    excel_rows.each do |row|
-      row.cells.each do |cell|
-        yield(cell) if cell.value
+    def process(value)
+      case type
+      when :string
+        value.strip.chomp
+      when :integer
+        value.scan(/\d/).join.to_i
+      else
+        value
       end
     end
   end
 
-  def excel_rows
-    book = RubyXL::Parser.parse @document
-    sheet = book.worksheets[0]
-    sheet.sheet_data.rows
-  end
+  class Parser
+    attr_accessor :tags, :headings
 
-  def parse_value(value)
-    value.strip if value && value != 'N/A'
-  end
-
-  def parse_size(size)
-    size.scan(/\d/).join.to_i if size
-  end
-
-  def method_missing(m)
-    return false unless m =~ /(\w+)_column/
-
-    col = instance_variable_get("@#{m}")
-    unless col
-      col = column_for(Regexp.last_match(1).to_sym)
-      instance_variable_set("@#{m}", col)
+    def initialize(document)
+      @document = document
+      @headings = []
+      @current_row = 0
+      @tags = []
     end
-    col
+
+    def config
+      yield(self)
+      set_headers
+    end
+
+    def heading(name, type: :string, required: false)
+      @headings << Heading.new(name, type: type, required: required)
+    end
+
+    def parse
+      @tags = []
+      each_valid_excel_row do |row|
+        tags << hash_for_headings(row)
+      end
+      self
+    end
+
+    def hash_for_headings(row)
+      hash = {}
+      @headings.each do |heading|
+        hash[heading.name.to_sym] = get_value(row, heading)
+      end
+      hash
+    end
+
+    private
+
+    def each_valid_excel_row
+      excel_rows[row_after_headers..-1].each do |row|
+        yield(row) if valid_row?(row)
+      end
+    end
+
+    def get_value(row, heading)
+      value = row[heading.column].value
+      heading.process(value)
+    end
+
+    def set_headers
+      headings.each do |heading|
+        each_cell do |cell|
+          heading.cell = cell if cell.value.downcase =~ /#{heading.name}/
+        end
+      end
+    end
+
+    def row_after_headers
+      headings[0].row + 1
+    end
+
+    def valid_row?(row)
+      headings.select(&:required?).each do |heading|
+        return false if row[heading.column].value.nil?
+      end
+      true
+    end
+
+    def each_cell
+      excel_rows.each do |row|
+        row.cells.each do |cell|
+          yield(cell) if cell.value
+        end
+      end
+    end
+
+    def excel_rows
+      book = RubyXL::Parser.parse @document
+      sheet = book.worksheets[0]
+      sheet.sheet_data.rows
+    end
   end
 end

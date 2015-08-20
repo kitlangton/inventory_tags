@@ -3,7 +3,7 @@ require './app/services/excel_tags_parser'
 describe ExcelTagsParser do
 
   it "parses an Excel doc and returns an array of hashes" do
-    tags = ExcelTagsParser.new(excel_doc, 'model', 'manufacturer', 'name', 'size', 'color').parse.tags
+    tags = ExcelTagsParser.new(excel_doc).parse.tags
     expect(tags.count).to eq 19
     expect(tags.first[:name]).to eq "iPhone 4S"
     expect(tags.first[:size]).to eq 16
