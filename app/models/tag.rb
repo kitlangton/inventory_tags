@@ -16,13 +16,12 @@ class Tag < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   def get_image
-    p self
     pdf = TagPdf.new(self, nil)
-    t = Tempfile.new(["pdf", ".pdf"])
+    t = Tempfile.new(["pdf#{self.id}", ".pdf"])
     t.close
     pdf.render_file(t.path)
     image = Magick::ImageList.new(t.path)
-    img = Tempfile.new(["image",".png"])
+    img = Tempfile.new(["image#{self.id}",".png"])
     img.close
     image.write(img.path) { self.quality = 100 }
     `convert #{img.path} -background white -flatten -quality 100 #{img.path}`
@@ -47,7 +46,11 @@ class Tag < ActiveRecord::Base
   end
 
   def hex
-    self.color.hex || "#ffffff"
+    if self.color
+      self.color.hex
+    else
+      "#ffffff"
+    end
   rescue
     "#ffffff"
   end

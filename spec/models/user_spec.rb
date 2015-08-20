@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "user" do
   context "store_user" do
     it "has a valid factory" do
-      user = create(:user)
+      user = create(:store_user)
       expect(user).to be_valid
     end
   end

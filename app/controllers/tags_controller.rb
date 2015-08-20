@@ -74,53 +74,25 @@ class TagsController < ApplicationController
     end
   end
 
-  def new_excel_import
-    authorize Tag, :create?
-  end
-
-  def import_excel
-    uploaded_file = params[:import][:excel_doc]
-    file_name = uploaded_file.tempfile.to_path.to_s
-    @tags = []
-    tags = ExcelTagsParser.new(file_name).parse.tags
-    tags.each do |tag|
-      tag[:color] = Color.find_or_initialize_by(name: tag[:color])
-      @tags << Tag.new(tag)
-    end
-  end
-
-  def submit_excel
-    @tags = []
-    params[:tags].each do |k,v|
-      tag = Tag.create(manufacturer: v[:manufacturer], name: v[:name], model: v[:model], color:find_color(v[:color]), size: v[:size], complete: false)
-      ImageWorker.perform_async(tag.id)
-      @tags << tag
-    end
-
-    if @tags.any? { |t| t.color.try(:complete) == false }
-      redirect_to confirm_colors_url, flash: { success: "Your tags have been created successfully." }
-    else
-      redirect_to tags_url, flash: { success: "Your tags have been created successfully." }
-    end
-  end
-
   def confirm_colors
     @new_colors = Color.where(complete: false)
   end
 
-  def save_excel
-    params[:colors].each do |k,v|
-      c = Color.find(v[:id])
-      c.tags.each do |t|
-        t.image.destroy
-        ImageWorker.perform_async(t.id)
-      end
-      c.update(name: v[:name], hex: v[:hex], complete: true)
-    end
-    redirect_to tags_url
+  private
+
+  def find_tag
+    @tag = Tag.find(params[:id])
   end
 
-  private
+  def tag_params
+    params.require(:tag).permit(:name, :model, :manufacturer, :size)
+  end
+
+  def get_hex(name)
+    return Colorable::Color.new(name).hex
+  rescue
+    "#ffffff"
+  end
 
   def find_color(color)
     return nil if color == ""
@@ -130,23 +102,5 @@ class TagsController < ApplicationController
     else
       Color.create(name: "#{color}", hex: "#{get_hex(color)}", complete: false)
     end
-  end
-
-  def find_tag
-    @tag = Tag.find(params[:id])
-  end
-
-  def get_hex(name)
-    return Colorable::Color.new(name).hex
-  rescue
-    "#ffffff"
-  end
-
-  def excel_params
-    params.require(:tags).permit(:name, :model, :manufacturer, :size, :color)
-  end
-
-  def tag_params
-    params.require(:tag).permit(:name, :model, :manufacturer, :size)
   end
 end

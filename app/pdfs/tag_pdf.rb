@@ -18,13 +18,6 @@ class TagPdf < Prawn::Document
       column: 0,
       align: :center
     move_down 10
-    # stroke do
-    #   stroke_color '000000'
-    #   fill_color 'ffffff'
-    #   fill_and_stroke_rectangle [0,-20], 175, 50
-    #   stroke_color '000000'
-    #   fill_color '000000'
-    # end
     image = Tempfile.new('barcode.png')
     image.write @tag.display_barcode_png
     image.close

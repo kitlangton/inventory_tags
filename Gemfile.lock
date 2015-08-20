@@ -248,6 +248,8 @@ GEM
       json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
       redis-namespace (~> 1.5, >= 1.5.2)
+    sidekiq-unique-jobs (3.0.14)
+      sidekiq (>= 2.6)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -345,6 +347,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   selenium-webdriver
   sidekiq
+  sidekiq-unique-jobs
   simple_form
   slim-rails
   spring

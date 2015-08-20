@@ -1,6 +1,6 @@
 h1 Excel Import
 .form
-  = form_for :import, url: import_excel_path, method: :post do |f|
+  = form_for :import, url: confirm_tags_excel_import_path, method: :post do |f|
     = f.file_field :excel_doc
     br
     = f.submit "Import From Excel", class: "pure-button button-success"

@@ -1,30 +1,36 @@
 Rails.application.routes.draw do
+    post 'tags/excel_imports/confirm', as: 'confirm_tags_excel_import', to: 'tags/excel_imports#confirm'
+    post 'tags/excel_imports/save', as: 'save_tags_excel_import', to: 'tags/excel_imports#save_excel'
+  namespace :tags do
+    resources :excel_imports, only: [:new, :create]
+    # get 'excel_imports/new', as: 'new_excel_import', to: 'excel_imports#new'
+    # get 'excel_imports/edit'
+  end
+
+  namespace :tags do
+    get 'excel/new'
+    get 'excel/edit'
+  end
+
+  # get 'tags/excel/import', as: 'new_excel_import', to: 'tags#new_excel_import'
+  # post 'tags/excel/import', as: 'import_excel', to: 'tags#import_excel'
+  # post 'tags/excel/submit', as: 'submit_excel', to: 'tags#submit_excel'
+  # post 'tags/excel/save', as: 'save_excel', to: 'tags#save_excel'
+  get 'tags/excel/confirm_colors', as: 'confirm_colors', to: 'tags#confirm_colors'
+
   namespace :admin do
   get 'users/index'
   end
 
   get 'admin_users/index'
-
   get 'cart/show'
 
   devise_for :users
   get 'onboarding/index'
 
-  get 'colors/index'
-
-  get 'colors/new'
-
-  get 'colors/edit'
-
   root 'tags#index'
 
   get 'manufacturers/index'
-  get 'tags/index'
-  get 'tags/excel/import', as: 'new_excel_import', to: 'tags#new_excel_import'
-  post 'tags/excel/import', as: 'import_excel', to: 'tags#import_excel'
-  post 'tags/excel/submit', as: 'submit_excel', to: 'tags#submit_excel'
-  post 'tags/excel/save', as: 'save_excel', to: 'tags#save_excel'
-  get 'tags/excel/confirm_colors', as: 'confirm_colors', to: 'tags#confirm_colors'
   get 'onboarding', as: 'onboarding', to: "onboarding#index"
   post 'onboarding/onboard', as: 'onboard_user', to: 'onboarding#onboard_user'
 

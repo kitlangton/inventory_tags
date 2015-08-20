@@ -17,13 +17,13 @@ $ ->
     defaultDuration: 700,
     calls: [
             [ { color: ['#000', '#00F'], opacity: [1 , 0] , translateY: [0, 20], translateZ: 0 } ],
-            [ { color: ['#000', '#FFF'] } ]
+            [ { color: ['#000', '#FFFFFF'] } ]
         ]
 
   $('.plus-callout').click ->
     # $('.tag-top').velocity 'callout.bounce'
     $('.cart-status').velocity(
-      color: '#fff'
+      color: '#ffffff'
     ).velocity('reverse')
   if $('.anatomy').size() > 0
     $(".hover").hover(
@@ -81,7 +81,7 @@ $ ->
           $(".cart-callout").click ->
             $("#cart-header").velocity(
               backgroundColor: '#0078E7').velocity(
-              backgroundColor: '#FFF')
+              backgroundColor: '#FFFFFF')
             $("#cart-header").velocity('stop').velocity 'callout.pulse'
           $("#cart-header").click ->
             $(@).unbind 'click'

@@ -4,7 +4,7 @@ feature "Area user imports tags from an excel doc" do
   scenario "is redirected away if if not an area user" do
     sign_in_as(create(:store_user))
 
-    visit new_excel_import_path
+    visit new_tags_excel_import_path
     expect(current_path).to eq root_path
   end
 

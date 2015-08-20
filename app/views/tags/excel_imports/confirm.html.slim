@@ -2,7 +2,7 @@ h1 Import
 
 h3.center Please double check all of the data. Values in red need to edited.
 
-= form_for :tags, url: submit_excel_path, method: :post do |f|
+= form_for :tags, url: tags_excel_imports_path, method: :post do |f|
   .container
     table.pure-table.pure-table-striped.pure-table-centered
       thead
@@ -14,5 +14,5 @@ h3.center Please double check all of the data. Values in red need to edited.
           th Color
       tbody
         - @tags.each_with_index do |tag, i|
-          = render partial: 'prospective_tag', locals: { tag: tag, i: i }
+          = render partial: 'tag_row', locals: { tag: tag, i: i }
     h1=  f.submit "Create Tags", class: "pure-button button-success", data: { disable_with: "Creating Tags..." }

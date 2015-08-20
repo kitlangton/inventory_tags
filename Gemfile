@@ -37,14 +37,12 @@ gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 gem 'figaro'
 gem 'sidekiq'
+gem 'sidekiq-unique-jobs'
 gem 'redis'
 gem 'nprogress-rails'
 gem 'dalli'
 gem 'memcachier'
 gem 'rack-mini-profiler'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 group :production do
   gem 'rails_12factor'
