@@ -43,6 +43,7 @@ gem 'nprogress-rails'
 gem 'dalli'
 gem 'memcachier'
 gem 'rack-mini-profiler'
+gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :production do
   gem 'rails_12factor'
