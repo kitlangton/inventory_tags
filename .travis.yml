@@ -1,11 +1,9 @@
 language: ruby
-rvm:
-  - "2.2.2"
-env:
-  - DB=postgresql
-script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rake
-addons:
-    postgresql: "9.3"
+script: 'true'
+deploy:
+  provider: heroku
+  api_key:
+    secure: X5VWPwTcuEwI1LYKE594npX74IPaqvL/AVaFE3CpI4CchEEKZM7VAUioQRYaMykik5GzCCu0pDPcuLABI7vvg6l8TFvcEYTuWWWLHDwB/TtpWdY86eb+nfK6D1xgX8EuxctxLsjScgCSe22rks5UPHRIgVjxe6Oq6eY58J11LYCGskglIIfA4MROFfmaIn70ARKNysMETDQGlWjAQ2MTIn+Wu+TSy9kdSPDsxpt2RtiJSQ5pH8m8AL4poOm7qZPzzRaZiAZVyiaa1lUDO6i1oR8Bflg2AzGB+B2CpRoBgM3A9lRy/NWxRWGD385DJJoLuDd73g5NFD9kAOoJ5FMjI/K/IbqK7IMAm7kpN5OpFK4ynwrcsHaJey30l+IDJvlGUspZFUbQxd4LUii9th9+zzhNQpTvUSeVhl9l51jfrJ6xROLFzVgiQCZkE4xtjFM5D16ySFHANQaKwkDogRrc68VUCdLvNsJM1a8bFM10Th+K0XLsHDXcvK9iDlCTqqdjY5zuXp1aA2C1IZAXuePx4oAOYR2l5JTDtwDnDLjKr/tzBuryyCENMv2cOAjQWNEhhmjfBRvRxWKmWlghsIAGvENA7q4pgXnouz3aFOCCqeoLePI607lxiWDKpQ2ZVcwZj/1Auf1iN/1iyes1j7yVlFt8/07H5m7XUmisXSrjfEU=
+  app: cryptic-basin-8987
+  on:
+    repo: kitlangton/inventory_tags
