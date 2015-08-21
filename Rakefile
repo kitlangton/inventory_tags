@@ -4,3 +4,9 @@
 require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
+
+desc "Delete all tags and colors"
+task :destroy_all do
+  Tag.destroy_all
+  Color.destroy_all
+end

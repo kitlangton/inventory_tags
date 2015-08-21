@@ -12,7 +12,7 @@ class ExcelTagsParser
     parser.config do |p|
       p.heading 'Name', type: :string, required: true
       p.heading 'Manufacturer', type: :string, required: true
-      p.heading 'Model', type: :string, required: false
+      p.heading 'Model #', type: :string, required: false, model_attribute: "model"
       p.heading 'Color', type: :string, required: false
       p.heading 'Size', type: :integer, required: false
     end
@@ -25,11 +25,12 @@ module ExcelParser
   class Heading
     attr_reader :name, :type
     attr_accessor :cell
-    def initialize(name, type: :string, required: false)
+    def initialize(name, type: :string, required: false, model_attribute: nil)
       @requried = required
       @name = name.downcase
       @type = type
       @cell = nil
+      @model_attribute = model_attribute
     end
 
     def required?
@@ -43,6 +44,11 @@ module ExcelParser
     def row
       @cell.row
     end
+
+    def attribute
+      @model_attribute || @name
+    end
+
 
     def process(value)
       return unless value
@@ -72,8 +78,8 @@ module ExcelParser
       set_headers
     end
 
-    def heading(name, type: :string, required: false)
-      @headings << Heading.new(name, type: type, required: required)
+    def heading(name, type: :string, required: false, model_attribute: nil)
+      @headings << Heading.new(name, type: type, required: required, model_attribute: model_attribute)
     end
 
     def parse
@@ -87,7 +93,7 @@ module ExcelParser
     def hash_for_headings(row)
       hash = {}
       @headings.each do |heading|
-        hash[heading.name.to_sym] = get_value(row, heading)
+        hash[heading.attribute.to_sym] = get_value(row, heading)
       end
       hash
     end
