@@ -54,6 +54,7 @@ module ExcelParser
       return unless value
       case type
       when :string
+        return "" if value =~ /N\/A/
         value.strip.chomp
       when :integer
         value.scan(/\d/).join.to_i
