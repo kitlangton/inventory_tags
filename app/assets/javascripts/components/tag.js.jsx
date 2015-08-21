@@ -2,6 +2,19 @@ var Tags = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
+  componentDidMount: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toSTring());
+      }.bind(this)
+    });
+  },
   render: function() {
     var tagNodes = this.props.data.map(function (tag) {
       return (

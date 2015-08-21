@@ -11,8 +11,8 @@ class TagsController < ApplicationController
     authorize @tags
     respond_to do |format|
       format.html
+      format.json { render json: @tags }
       format.js
-      format.json { render json: Tag.all.pluck(:manufacturer).uniq.map(&:downcase).map(&:capitalize) }
     end
   end
 
