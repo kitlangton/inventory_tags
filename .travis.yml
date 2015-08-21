@@ -1,9 +1,11 @@
 language: ruby
 rvm: '2.2.2'
-script: bundle exec rspec spec
 before_script:
     - psql -c 'create database travis_ci_test;' -U postgres
     - cp config/database.yml.travis config/database.yml
+script: bundle exec rspec spec
+addons:
+    postgresql: "9.3"
 deploy:
   provider: heroku
   api_key:
