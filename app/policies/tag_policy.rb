@@ -1,24 +1,17 @@
 class TagPolicy < ApplicationPolicy
   def create?
-    if user.role == "Area" || user.admin?
-      true
-    end
+    true if user.role == 'Area' || user.admin?
   end
 
   def update?
-    if user.role == "Area" || user.admin?
-      true
-    end
+    true if user.role == 'Area' || user.admin?
   end
 
   def destroy?
-    if user.role == "Area" || user.admin?
-      true
-    end
+    true if user.role == 'Area' || user.admin?
   end
 
   def index?
     true
   end
-
 end

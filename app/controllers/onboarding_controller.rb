@@ -4,9 +4,7 @@ class OnboardingController < ApplicationController
   end
 
   def onboard_user
-    unless current_user.onboarded?
-      current_user.onboard!
-    end
+    current_user.onboard! unless current_user.onboarded?
     redirect_to tags_url
   end
 end

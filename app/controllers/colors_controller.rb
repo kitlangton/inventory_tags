@@ -39,6 +39,6 @@ class ColorsController < ApplicationController
   private
 
   def color_params
-    params.require(:color).permit(:name,:hex)
+    params.require(:color).permit(:name, :hex)
   end
 end

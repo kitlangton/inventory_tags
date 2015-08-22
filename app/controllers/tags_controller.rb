@@ -32,7 +32,7 @@ class TagsController < ApplicationController
 
   def create
     @tag = Tag.new(tag_params)
-    @tag.assign_attributes( color: find_color(params[:tag][:color]))
+    @tag.assign_attributes(color: find_color(params[:tag][:color]))
     if @tag.save
       ImageWorker.perform_async(@tag.id)
       if @tag.color.complete == false
@@ -50,7 +50,7 @@ class TagsController < ApplicationController
   end
 
   def update
-    @tag.assign_attributes( color: find_color(params[:tag][:color]))
+    @tag.assign_attributes(color: find_color(params[:tag][:color]))
     if @tag.update(tag_params)
       ImageWorker.perform_async(@tag.id)
       if @tag.color && @tag.color.complete == false
@@ -65,9 +65,7 @@ class TagsController < ApplicationController
 
   def destroy
     session[:cart].delete(@tag.id.to_s)
-    if @tag.destroy
-      redirect_to tags_path
-    end
+    redirect_to tags_path if @tag.destroy
   end
 
   def show
@@ -75,7 +73,7 @@ class TagsController < ApplicationController
       format.html
       format.pdf do
         pdf = TagPdf.new(@tag, view_context)
-        send_data pdf.render, filename: "Tag##{@tag.model}", type: "application/pdf"
+        send_data pdf.render, filename: "Tag##{@tag.model}", type: 'application/pdf'
       end
     end
   end
@@ -97,11 +95,11 @@ class TagsController < ApplicationController
   def get_hex(name)
     return Colorable::Color.new(name).hex
   rescue
-    "#ffffff"
+    '#ffffff'
   end
 
   def find_color(color)
-    return nil if color == ""
+    return nil if color == ''
     found = Color.where(name: color).first
     if found
       found

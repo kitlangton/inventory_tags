@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def type
-    return "Admin" if admin?
-    "Store"
+    return 'Admin' if admin?
+    'Store'
   end
 
   def onboard!

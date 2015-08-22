@@ -20,20 +20,18 @@ feature "Area user imports tags from an excel doc" do
     expect(page).to have_content "16GB"
   end
 
-  # scenario "and submits the excel" do
-  #   sign_in_as(create(:area_user))
-  #
-  #   click_link "Import Excel"
-  #   attach_valid_excel
-  #   click_button "Import From Excel"
-  #
-  #   click_button "Create Tags"
-  #   expect(page).to have_css ".alert-success", text: "Your tags have been created successfully."
-  #   expect(page).to have_content "White CPO"
-  #   expect(current_path).to eq confirm_colors_path
-  # end
+  scenario "and submits the excel" do
+    sign_in_as(create(:area_user))
 
-  # scenario "with an invalid excel"
+    click_link "Import Excel"
+    attach_valid_excel
+    click_button "Import From Excel"
+
+    click_button "Create Tags"
+    expect(page).to have_content "Assign Colors"
+    expect(page).to have_content "White CPO"
+    expect(current_path).to eq confirm_colors_path
+  end
 
   def attach_valid_excel
     file = File.expand_path("../fixtures/test.xlsx", __dir__)

@@ -1,26 +1,18 @@
 class UserPolicy < ApplicationPolicy
   def index?
-    if user.role == "Area" || user.admin?
-      true
-    end
+    true if user.role == 'Area' || user.admin?
   end
 
   def create?
-    if user.role == "Area" || user.admin?
-      true
-    end
+    true if user.role == 'Area' || user.admin?
   end
 
   def update?
-    if user.role == "Area" || user.admin?
-      true
-    end
+    true if user.role == 'Area' || user.admin?
   end
 
   def set_role?
-    if user.admin?
-      true
-    end
+    true if user.admin?
   end
 
   class Scope < Scope
@@ -28,7 +20,7 @@ class UserPolicy < ApplicationPolicy
       if user.admin?
         scope.all
       else
-        scope.where.not(admin: true).where.not(role: "Area")
+        scope.where.not(admin: true).where.not(role: 'Area')
       end
     end
   end

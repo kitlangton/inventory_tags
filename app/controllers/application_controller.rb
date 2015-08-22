@@ -13,10 +13,10 @@ class ApplicationController < ActionController::Base
   end
 
   def miniprofiler
-     Rack::MiniProfiler.authorize_request if current_user && current_user.admin?
+    Rack::MiniProfiler.authorize_request if current_user && current_user.admin?
   end
 
   rescue_from Pundit::NotAuthorizedError do |exception|
-        redirect_to root_url, alert: exception.message
+    redirect_to root_url, alert: exception.message
   end
 end

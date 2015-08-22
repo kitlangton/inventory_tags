@@ -12,12 +12,21 @@ class ExcelTagsParser
     parser.config do |p|
       p.heading 'Name', type: :string, required: true
       p.heading 'Manufacturer', type: :string, required: true
-      p.heading 'Model #', type: :string, required: false, model_attribute: "model"
+      p.heading 'Model #', type: :string, required: false, model_attribute: 'model'
       p.heading 'Color', type: :string, required: false
       p.heading 'Size', type: :integer, required: false
     end
     @tags = parser.parse.tags
     self
+  end
+
+  def create_tags
+    output_tags = []
+    @tags.each do |tag|
+      tag[:color] = Color.find_or_initialize_by(name: tag[:color])
+      output_tags << Tag.new(tag)
+    end
+    output_tags
   end
 end
 
@@ -49,12 +58,11 @@ module ExcelParser
       @model_attribute || @name
     end
 
-
     def process(value)
       return unless value
       case type
       when :string
-        return "" if value =~ /N\/A/
+        return '' if value =~ /N\/A/
         value.strip.chomp
       when :integer
         value.scan(/\d/).join.to_i

@@ -13,15 +13,15 @@ class Tag < ActiveRecord::Base
   validates :model, presence: true
   validates :manufacturer, presence: true
   has_attached_file :image
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :image, content_type: %r{\Aimage\/.*\Z}
 
-  def get_image
+  def set_image
     pdf = TagPdf.new(self, nil)
-    t = Tempfile.new(["pdf#{self.id}", ".pdf"])
+    t = Tempfile.new(["pdf#{id}", '.pdf'])
     t.close
     pdf.render_file(t.path)
     image = Magick::ImageList.new(t.path)
-    img = Tempfile.new(["image#{self.id}",".png"])
+    img = Tempfile.new(["image#{id}", '.png'])
     img.close
     image.write(img.path) { self.quality = 100 }
     `convert #{img.path} -background white -flatten -quality 100 #{img.path}`
@@ -33,26 +33,26 @@ class Tag < ActiveRecord::Base
     if manufacturer
       manufacturer.upcase
     else
-      "N/A"
+      'N/A'
     end
   end
 
   def display_color
-    self.color.try(:name) || ""
+    color.try(:name) || ''
   end
 
   def dark_color?
-    self.color.try(:dark?)
+    color.try(:dark?)
   end
 
   def hex
-    if self.color
-      self.color.hex
+    if color
+      color.hex
     else
-      "#ffffff"
+      '#ffffff'
     end
   rescue
-    "#ffffff"
+    '#ffffff'
   end
 
   def display_size(gb: true)
@@ -63,23 +63,23 @@ class Tag < ActiveRecord::Base
         "#{size}"
       end
     else
-      ""
+      ''
     end
   end
 
   def display_barcode(height:50)
-    barcode = Barby::Code128B.new(self.model)
+    barcode = Barby::Code128B.new(model)
     barcode.to_svg(height: height)
   end
 
   def display_barcode_png(height:80)
-    barcode = Barby::Code128B.new(self.model)
+    barcode = Barby::Code128B.new(model)
     barcode.to_png(height: height, xdim: 2)
   end
 
   def self.search(search)
     if search
-      where("name ILIKE ?", "%#{search}%")
+      where('name ILIKE ?', "%#{search}%")
     else
       where(nil)
     end
@@ -91,9 +91,9 @@ class Tag < ActiveRecord::Base
 
   def prawn_image
     if Rails.env.production?
-      open(self.image.url)
+      open(image.url)
     else
-      self.image.path
+      image.path
     end
   end
 
@@ -104,5 +104,4 @@ class Tag < ActiveRecord::Base
   def expire_tag_all_cache
     Rails.cache.delete('Tag.all')
   end
-
 end

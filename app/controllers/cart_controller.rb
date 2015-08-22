@@ -11,13 +11,13 @@ class CartController < ApplicationController
     session[:cart] ||= []
     session[:cart] << params[:id]
     respond_to do |format|
-      format.json { render json: "success" }
+      format.json { render json: 'success' }
     end
   end
 
   def process_cart
     @cart_tags.select { |t| !t.image.exists? }.each do |tag|
-      tag.get_image
+      tag.set_image
       tag.save
     end
     send_data 'hi'
@@ -25,14 +25,14 @@ class CartController < ApplicationController
 
   def download_cart
     imposed = ImposePdf.new(@cart_tags, view_context)
-    send_data imposed.render, filename: "Test.pdf", type: "application/pdf"
+    send_data imposed.render, filename: 'Test.pdf', type: 'application/pdf'
   end
 
   def delete_from_cart
     session[:cart] ||= []
     session[:cart].delete(params[:id])
     respond_to do |format|
-      format.json { render json: "success" }
+      format.json { render json: 'success' }
     end
   end
 
@@ -40,7 +40,7 @@ class CartController < ApplicationController
     session[:cart] = []
     respond_to do |format|
       format.html { redirect_to cart_path }
-      format.json { render json: "success" }
+      format.json { render json: 'success' }
     end
   end
 
@@ -51,14 +51,11 @@ class CartController < ApplicationController
   rescue
     @valid_tags = []
     @cart.each do |tag|
-      if Tag.find_by_id(tag.to_i)
-        @valid_tags << tag
-      end
+      @valid_tags << tag if Tag.find_by_id(tag.to_i)
     end
     @valid_tags.compact
     session[:cart] = @valid_tags
     @cart = @valid_tags
     @cart_tags = Tag.where(id: @valid_tags)
   end
-
 end
