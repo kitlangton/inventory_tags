@@ -2,7 +2,6 @@ class ImposePdf < Prawn::Document
   def initialize(tags, view)
     super()
     @view = view
-
     tags.each_with_index do |tag, i|
       pre_image_cursor = cursor
 
@@ -10,6 +9,7 @@ class ImposePdf < Prawn::Document
         width: 278,
         height: 131,
         position: :center
+
       stroke do
         if (i+5) % 5 == 0
           line [132, pre_image_cursor+10], [132, pre_image_cursor]
