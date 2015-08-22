@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   root 'tags#index'
 
-  get 'manufacturers/index'
+  get 'manufacturers', as: 'manufacturers', to: "tags#manufacturers"
   get 'onboarding', as: 'onboarding', to: "onboarding#index"
   post 'onboarding/onboard', as: 'onboard_user', to: 'onboarding#onboard_user'
 

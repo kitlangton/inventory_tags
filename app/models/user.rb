@@ -8,4 +8,9 @@ class User < ActiveRecord::Base
     return "Admin" if admin?
     "Store"
   end
+
+  def onboard!
+    self.onboarded = true
+    save
+  end
 end

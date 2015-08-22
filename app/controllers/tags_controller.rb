@@ -16,6 +16,12 @@ class TagsController < ApplicationController
     end
   end
 
+  def manufacturers
+    respond_to do |format|
+      format.json { render json: Tag.distinct.pluck(:manufacturer) }
+    end
+  end
+
   def new
     @tag = Tag.new
     authorize @tag
@@ -30,9 +36,9 @@ class TagsController < ApplicationController
     if @tag.save
       ImageWorker.perform_async(@tag.id)
       if @tag.color.complete == false
-        redirect_to confirm_colors_path
+        redirect_to confirm_colors_path, flash: { success: "Tag for #{@tag.name} created successfully!" }
       else
-        redirect_to tags_path
+        redirect_to tags_path, flash: { success: "Tag for #{@tag.name} created successfully!" }
       end
     else
       render :new

@@ -11,7 +11,7 @@ $ ->
       datumTokenizer: Bloodhound.tokenizers.whitespace
       queryTokenizer: Bloodhound.tokenizers.whitespace
       prefetch:
-        url: '/tags.json'
+        url: '/manufacturers.json'
         cache: false
     )
 
