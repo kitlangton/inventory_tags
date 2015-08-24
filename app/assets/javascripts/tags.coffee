@@ -40,7 +40,6 @@ addToCart = (id) ->
     url: "/cart",
     data: { id: id },
     success:(data) ->
-      alert data.id
       return false
     error:(data) ->
       console.log data
@@ -58,7 +57,6 @@ deleteFromCart = (id) ->
     url: "/cart/delete",
     data: { id: id },
     success:(data) ->
-      alert data.id
       refreshCart()
       return false
     error:(data) ->
@@ -74,13 +72,11 @@ refreshCart = ->
       url: "/cart/tags",
       success:(data) ->
         console.log data
-        $('.tags-container').html data
-        $(document).trigger('page:load')
+        Turbolinks.visit "/cart"
         return false
       error:(data) ->
         console.log data
-        $('.tags-container').html data
-        $(document).trigger('page:load')
+        Turbolinks.visit "/cart"
         return false
     })
 
