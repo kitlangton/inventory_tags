@@ -43,7 +43,12 @@ Rails.application.routes.draw do
   get 'cart/process', as: 'process_cart', to: 'cart#process_cart'
 
   namespace :admin do
-    resources :users
+    namespace :users do
+      get 'activity/index', as: 'activity'
+    end
+    resources :users do
+      get 'activity/show', as: 'activity', to: 'users/activity#show'
+    end
     patch 'users', to:'users#update'
   end
 

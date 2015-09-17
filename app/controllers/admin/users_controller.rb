@@ -45,6 +45,10 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def activity
+
+  end
+
   def admin_user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :role)
   end
