@@ -1,5 +1,6 @@
 class ColorsController < ApplicationController
   def index
+    @new_colors = Color.all
     respond_to do |format|
       format.html
       format.json { render json: Color.all.pluck(:name) }
