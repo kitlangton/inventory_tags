@@ -16,6 +16,6 @@ h3.center Here you can review or change the values of any colors.
               td.color
                 = color.name
                 = hidden_field_tag "colors[#{i}][name]", color.name
-              td.swatch data-color=(color.hex) contentEditable="" readonly="readonly"
+              td.swatch.noselect data-color=(color.hex) contentEditable="" readonly="readonly"
                 = hidden_field_tag "colors[#{i}][hex]", color.hex
       h1 = f.submit class: "pure-button button-success", data: { disable_with: "Submitting..." }
