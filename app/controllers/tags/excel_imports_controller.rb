@@ -28,7 +28,7 @@ module Tags
       success = UpdateColors.new.call(params)[0]
       if success
         flash[:success] = 'Colors have been assigned successfully!.'
-        redirect_to tags_url
+        redirect_to colors_url
       else
         redirect_to confirm_colors_path
       end
